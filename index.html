@@ -1,1779 +1,1193 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>BerberimGelsin • Önizleme</title>
-  <meta name="description" content="BerberimGelsin: onaylı berber & kuaförler kapına gelsin. Demo önizleme."/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BerberimGelsin — Önizleme Demo</title>
+  <meta name="description" content="Berber & kuaför hizmeti kapında. Müşteri ilan açar, profesyoneller teklif verir — sen seçersin. Demo önizleme." />
+  <meta name="theme-color" content="#1E63FF" />
   <style>
     :root{
-      --bg0:#020617;
-      --bg1:#0b1226;
-      --card:#0b1220cc;
-      --line:#1f2a44;
-      --text:#eaf0ff;
-      --muted:#a7b3d6;
-      --blue:#2563eb;
-      --blue2:#3b82f6;
-      --orange:#f97316;
-      --orange2:#fb923c;
-      --good:#22c55e;
-      --bad:#ef4444;
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --r14:14px;
-      --r18:18px;
-      --r22:22px;
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --text:#0b1220;
+      --muted:#5b667a;
+      --line:rgba(13, 20, 33, .10);
+      --shadow:0 20px 60px rgba(16, 24, 40, .12);
+      --shadow2:0 10px 30px rgba(16, 24, 40, .10);
+      --blue:#1E63FF;
+      --blue2:#0B4CFF;
+      --orange:#FF7A00;
+      --orange2:#FF5F00;
+      --green:#16a34a;
+
+      --r12:12px;
+      --r16:16px;
+      --r20:20px;
+      --r24:24px;
+
       --max:1120px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
+      font-family:var(--font);
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(37,99,235,.35), transparent 60%),
-        radial-gradient(900px 600px at 110% 10%, rgba(249,115,22,.30), transparent 55%),
-        radial-gradient(800px 500px at 50% 110%, rgba(59,130,246,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      overflow-x:hidden;
+        radial-gradient(900px 380px at 12% 8%, rgba(30,99,255,.10), transparent 60%),
+        radial-gradient(700px 340px at 82% 14%, rgba(255,122,0,.12), transparent 60%),
+        var(--bg);
     }
-    a{ color:inherit; text-decoration:none; }
-    button{ font:inherit; cursor:pointer; border:0; }
-    input,select,textarea{ font:inherit; }
-    ::selection{ background: rgba(249,115,22,.25); }
+    a{color:inherit; text-decoration:none}
+    button{font-family:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
 
-    /* Layout */
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
-    .section{ padding:78px 0; }
-    .mt8{ margin-top:8px; } .mt12{ margin-top:12px; } .mt16{ margin-top:16px; } .mt22{ margin-top:22px; }
-    .muted{ color:var(--muted); }
-    .tiny{ font-size:12px; color:var(--muted); }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 12px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(2,6,23,.55);
-      backdrop-filter: blur(10px);
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(15,23,42,.35);
-      color: var(--muted);
-      font-size:12px;
-    }
-
-    /* Header */
-    .header{
+    /* Topbar */
+    .topbar{
       position:sticky; top:0; z-index:50;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(2,6,23,.62);
-      backdrop-filter: blur(14px);
+      backdrop-filter:saturate(180%) blur(12px);
+      background:rgba(255,255,255,.72);
+      border-bottom:1px solid rgba(13,20,33,.06);
     }
-    .hrow{
+    .topbar .row{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+      gap:14px; padding:12px 0;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.2px;
+      min-width:220px;
     }
     .logo{
-      width:36px; height:36px; border-radius:12px;
+      width:38px; height:38px; border-radius:12px;
       display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(249,115,22,.95), rgba(37,99,235,.95));
-      box-shadow: 0 10px 35px rgba(0,0,0,.35);
-      font-weight:900;
+      background:linear-gradient(135deg,var(--orange),#ffb000);
+      box-shadow:0 10px 24px rgba(255,122,0,.22);
+      color:white; font-weight:900;
     }
+    .brand b{display:block; line-height:1.05}
+    .brand small{display:block; color:var(--muted); font-weight:600}
     .nav{
-      display:flex; align-items:center; gap:10px;
+      display:flex; gap:18px; align-items:center;
+      color:#27324a; font-weight:650;
     }
-    .nav a{
-      color:var(--muted);
-      padding:10px 10px;
-      border-radius:12px;
-      display:inline-flex; gap:8px; align-items:center;
-    }
-    .nav a:hover{ background: rgba(255,255,255,.06); color:var(--text); }
-    .right{
-      display:flex; align-items:center; gap:10px;
-    }
-    .btn{
-      padding:11px 14px;
-      border-radius:14px;
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      border:1px solid rgba(255,255,255,.10);
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-    }
-    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.14); }
-    .btn:active{ transform: translateY(1px); }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(249,115,22,.98), rgba(251,146,60,.92));
-      color:#0b1020;
-      border-color: transparent;
-    }
-    .btn.blue{
-      background: linear-gradient(135deg, rgba(37,99,235,.98), rgba(59,130,246,.92));
-      border-color: transparent;
-      color:#fff;
-    }
-    .btn.ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.14);
-      color: var(--muted);
-    }
-    .hamb{
-      display:none;
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
+    .nav a{opacity:.86}
+    .nav a:hover{opacity:1}
+    .actions{
+      display:flex; gap:10px; align-items:center;
+      min-width:240px; justify-content:flex-end;
     }
 
-    /* Mobile menu */
-    .mnav{ display:none; padding:12px 0 16px; }
-    .mnav a{ display:block; padding:12px 12px; border-radius:14px; color:var(--muted); }
-    .mnav a:hover{ background: rgba(255,255,255,.06); color:var(--text); }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(13,20,33,.10);
+      background:rgba(255,255,255,.9);
+      padding:8px 12px; border-radius:999px;
+      box-shadow:0 10px 20px rgba(16,24,40,.06);
+      font-weight:700; color:#23304a;
+      max-width:240px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .btn{
+      border:0; cursor:pointer;
+      padding:11px 14px; border-radius:12px;
+      font-weight:800;
+      transition:.15s transform, .15s box-shadow, .15s opacity;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      color:white;
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      box-shadow:0 18px 40px rgba(30,99,255,.22);
+    }
+    .btn.primary:hover{box-shadow:0 22px 50px rgba(30,99,255,.28)}
+    .btn.orange{
+      color:white;
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      box-shadow:0 18px 40px rgba(255,122,0,.22);
+    }
+    .btn.orange:hover{box-shadow:0 22px 50px rgba(255,122,0,.28)}
+    .btn.ghost{
+      background:white;
+      border:1px solid rgba(13,20,33,.12);
+      color:#1c2740;
+      box-shadow:0 10px 20px rgba(16,24,40,.06);
+    }
+    .btn.ghost:hover{opacity:.95}
+    .btn.small{padding:9px 12px; border-radius:12px; font-weight:800}
 
     /* Hero */
-    .hero{
-      padding:64px 0 22px;
-    }
+    .hero{padding:34px 0 10px}
     .heroGrid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
+      display:grid; grid-template-columns: 1.25fr .75fr;
+      gap:18px; align-items:stretch;
+    }
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(13,20,33,.08);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .card.soft{
+      box-shadow:var(--shadow2);
+      border-radius:24px;
+    }
+    .cardPad{padding:26px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(13,20,33,.10);
+      background:rgba(255,255,255,.9);
+      font-weight:750; color:#26324a;
+    }
+    .dot{width:8px; height:8px; border-radius:50%}
+    .dot.blue{background:var(--blue)}
+    .dot.orange{background:var(--orange)}
+    .dot.green{background:var(--green)}
+    h1{
+      font-size:52px; line-height:1.02; margin:0 0 12px;
+      letter-spacing:-.02em;
+    }
+    .accent{
+      background:linear-gradient(90deg,var(--orange),#ff9a1a);
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent;
+    }
+    .sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:16.5px;
+      line-height:1.55;
+      max-width:60ch;
+      font-weight:600;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .miniRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:14px; color:#2b3750;
+      font-weight:650;
+    }
+    .miniTag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(13,20,33,.08);
+      background:rgba(255,255,255,.85);
+      color:#2b3750;
+      font-weight:750;
+    }
+    .miniTag svg{opacity:.9}
+
+    /* Status panel */
+    .statusTitle{
+      display:flex; justify-content:space-between; align-items:center;
+      margin:0 0 12px;
+    }
+    .statusTitle h3{margin:0; font-size:16px; letter-spacing:-.01em}
+    .live{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(13,20,33,.10);
+      background:rgba(255,255,255,.9);
+      font-weight:800;
+    }
+    .kv{
+      display:grid; gap:10px;
+      margin-top:12px;
+    }
+    .kv .item{
+      border-radius:18px;
+      border:1px solid rgba(13,20,33,.08);
+      background:rgba(255,255,255,.86);
+      padding:14px 14px;
+      box-shadow:0 10px 24px rgba(16,24,40,.06);
+    }
+    .kv .item b{display:block; margin-bottom:6px}
+    .kv .item span{color:var(--muted); font-weight:650}
+    .kv .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    /* Sections */
+    section{padding:22px 0}
+    .secHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin-bottom:12px;
+    }
+    .secHead h2{
+      margin:0; font-size:28px; letter-spacing:-.02em
+    }
+    .secHead p{margin:0; color:var(--muted); font-weight:650}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+
+    .tile{
+      border-radius:20px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(13,20,33,.08);
+      box-shadow:0 14px 34px rgba(16,24,40,.08);
+      padding:18px;
+    }
+    .tile .icon{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      background:rgba(30,99,255,.08);
+      border:1px solid rgba(30,99,255,.16);
+      margin-bottom:10px;
+    }
+    .tile.orange .icon{
+      background:rgba(255,122,0,.10);
+      border-color:rgba(255,122,0,.18);
+    }
+    .tile h4{margin:0 0 6px; font-size:16.5px}
+    .tile p{margin:0; color:var(--muted); font-weight:650; line-height:1.5}
+
+    .pricing{
+      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
       align-items:stretch;
     }
-    .heroCard{
-      border-radius: var(--r22);
-      border: 1px solid rgba(255,255,255,.10);
-      background: radial-gradient(1100px 500px at 20% 0%, rgba(37,99,235,.22), transparent 55%),
-                  radial-gradient(900px 500px at 100% 10%, rgba(249,115,22,.20), transparent 55%),
-                  rgba(2,6,23,.55);
-      box-shadow: var(--shadow);
-      padding:28px;
-      overflow:hidden;
+    .priceCard{
+      border-radius:24px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(13,20,33,.08);
+      box-shadow:var(--shadow2);
+      padding:20px;
       position:relative;
-    }
-    .heroH1{
-      font-size:44px;
-      line-height:1.05;
-      margin:14px 0 12px;
-      letter-spacing:-.8px;
-    }
-    .accentO{ color: var(--orange2); }
-    .heroP{
-      margin:0;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.7;
-      max-width: 54ch;
-    }
-    .heroActions{
-      margin-top:18px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .heroMini{
-      margin-top:18px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      color:var(--muted);
-    }
-
-    .sideCard{
-      border-radius: var(--r22);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(2,6,23,.50);
-      box-shadow: var(--shadow);
-      padding:18px;
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .sideTop{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .stat{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      border-radius:18px;
-      padding:14px;
-      display:grid; gap:6px;
-    }
-    .stat b{ font-size:20px; }
-    .stat span{ color:var(--muted); font-size:12px; }
-
-    /* Cards / grids */
-    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
-    .grid2{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; }
-    .card{
-      border-radius: var(--r18);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(2,6,23,.42);
-      box-shadow: 0 12px 35px rgba(0,0,0,.30);
-      padding:18px;
       overflow:hidden;
     }
-    .card h3{ margin:10px 0 8px; }
-    .card p{ margin:0; color:var(--muted); line-height:1.65; }
-    .icon{
-      width:42px; height:42px;
-      border-radius:16px;
+    .priceCard .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      border-radius:999px;
+      padding:7px 10px;
+      border:1px solid rgba(13,20,33,.10);
+      background:white;
+      font-weight:850;
+      margin-bottom:10px;
+    }
+    .priceCard .big{
+      font-size:34px; margin:0 0 6px; letter-spacing:-.02em
+    }
+    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .list li{display:flex; gap:10px; align-items:flex-start; color:#283451; font-weight:700}
+    .check{
+      width:18px; height:18px; border-radius:6px;
+      background:rgba(22,163,74,.12);
+      border:1px solid rgba(22,163,74,.25);
       display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      font-size:18px;
-    }
-
-    .titleRow{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-      margin-bottom:16px;
-    }
-    .h2{
-      margin:0;
-      font-size:30px;
-      letter-spacing:-.4px;
-    }
-
-    /* Pricing */
-    .price{
-      font-size:42px; letter-spacing:-.8px;
-      margin:6px 0;
-      color: var(--orange2);
-    }
-    .priceSmall{ color:var(--muted); font-size:13px; }
-    .list{ margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px; }
-    .li{
-      display:flex; gap:10px; align-items:flex-start; color:var(--muted);
-    }
-    .tick{
-      width:20px; height:20px; border-radius:8px;
-      display:grid; place-items:center;
-      background: rgba(34,197,94,.12);
-      border:1px solid rgba(34,197,94,.25);
-      color: var(--good);
-      flex:0 0 auto;
       margin-top:1px;
-      font-weight:900;
+      flex:0 0 auto;
     }
 
     /* FAQ */
-    .faq{ display:grid; gap:10px; }
+    .faq{display:grid; gap:10px}
     details{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(2,6,23,.35);
-      border-radius: 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(13,20,33,.08);
+      box-shadow:0 12px 26px rgba(16,24,40,.07);
       padding:14px 14px;
     }
     summary{
       cursor:pointer;
+      font-weight:850;
+      color:#1b2540;
       list-style:none;
-      display:flex; justify-content:space-between; align-items:center;
-      font-weight:700;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
-    summary::-webkit-details-marker{ display:none; }
-    details p{ margin:10px 0 0; color:var(--muted); line-height:1.7; }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted); font-weight:650; line-height:1.55}
 
     /* Footer */
     footer{
-      border-top:1px solid rgba(255,255,255,.08);
-      background: rgba(2,6,23,.55);
-      padding:34px 0;
+      padding:24px 0 40px;
+      border-top:1px solid rgba(13,20,33,.08);
+      background:rgba(255,255,255,.75);
+      margin-top:14px;
     }
-    .fgrid{
-      display:grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap:18px;
-      align-items:flex-start;
+    .footGrid{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:12px; align-items:start;
     }
-    .flinks a{
-      display:block;
-      padding:10px 10px;
-      border-radius:14px;
-      color:var(--muted);
-      border:1px solid transparent;
+    .footLinks{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px}
+    .footLinks a{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(13,20,33,.08);
+      background:rgba(255,255,255,.92);
+      font-weight:750;
+      color:#22304a;
     }
-    .flinks a:hover{
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
-      color:var(--text);
-    }
+    .footLinks a:hover{opacity:.95}
+    .copy{color:var(--muted); font-weight:650; line-height:1.5}
 
     /* Modal */
-    .modal{
+    .backdrop{
       position:fixed; inset:0;
-      display:none; place-items:center;
-      background: rgba(0,0,0,.60);
+      background:rgba(15, 23, 42, .46);
       backdrop-filter: blur(10px);
-      z-index:120;
-      padding:16px;
+      display:none;
+      z-index:100;
+      align-items:center; justify-content:center;
+      padding:18px;
     }
-    .modal.active{ display:grid; }
-    .modalBox{
-      width:min(560px, 100%);
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(2,6,23,.92);
-      box-shadow: var(--shadow);
+    .modal{
+      width:min(720px, 100%);
+      border-radius:24px;
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(13,20,33,.10);
+      box-shadow:0 40px 120px rgba(0,0,0,.25);
       overflow:hidden;
     }
-    .mHead{
-      padding:16px 18px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .modalHead{
       display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
+      padding:16px 18px;
+      border-bottom:1px solid rgba(13,20,33,.08);
     }
-    .mTitle{ font-weight:900; }
-    .mClose{
-      width:42px; height:42px; border-radius:14px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:var(--text);
+    .modalHead b{font-size:15px}
+    .x{
+      border:1px solid rgba(13,20,33,.14);
+      background:white;
+      width:40px; height:40px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:900;
+      color:#1c2740;
     }
-    .mBody{ padding:18px; }
-    .row{ display:grid; gap:10px; }
-    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .field label{ font-size:12px; color:var(--muted); display:block; margin-bottom:6px; }
-    .field input, .field select, .field textarea{
+    .modalBody{padding:18px}
+    .stepper{
+      display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px
+    }
+    .step{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(13,20,33,.10);
+      background:white;
+      font-weight:850;
+      color:#2a3550;
+      opacity:.6;
+    }
+    .step.active{opacity:1; border-color:rgba(30,99,255,.25); background:rgba(30,99,255,.06)}
+    .formGrid{display:grid; gap:10px}
+    .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    label{font-weight:800; color:#24304a; font-size:13px}
+    input, select, textarea{
       width:100%;
       padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+      border-radius:14px;
+      border:1px solid rgba(13,20,33,.12);
       outline:none;
+      font-weight:700;
+      background:white;
     }
-    .field textarea{ min-height: 90px; resize: vertical; }
-    .mFoot{
-      padding:14px 18px;
-      border-top:1px solid rgba(255,255,255,.08);
+    input:focus, select:focus, textarea:focus{
+      border-color:rgba(30,99,255,.45);
+      box-shadow:0 0 0 4px rgba(30,99,255,.12);
+    }
+    .hint{color:var(--muted); font-weight:650; font-size:13px; line-height:1.45}
+    .seg{
       display:flex; gap:10px; flex-wrap:wrap;
-      justify-content:flex-end;
-      background: rgba(255,255,255,.03);
+      margin-top:6px;
     }
-
-    /* App area */
-    .app{
-      display:none;
-      padding:30px 0 90px;
-    }
-    .app.active{ display:block; }
-    .tabs{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin:12px 0 18px;
-    }
-    .tab{
+    .seg button{
+      border:1px solid rgba(13,20,33,.12);
+      background:white;
       padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: var(--muted);
+      border-radius:14px;
+      font-weight:850;
+      cursor:pointer;
     }
-    .tab.active{
-      background: linear-gradient(135deg, rgba(37,99,235,.92), rgba(59,130,246,.86));
-      color:#fff;
-      border-color: transparent;
+    .seg button.active{
+      border-color:rgba(255,122,0,.35);
+      background:rgba(255,122,0,.08);
     }
-
-    .panel{
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(2,6,23,.45);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .pHead{
-      padding:16px 18px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      background: rgba(255,255,255,.03);
-    }
-    .pTitle{ font-weight:900; }
-    .pBody{ padding:18px; }
-
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
-    }
-
-    .empty{
-      padding:18px;
-      border:1px dashed rgba(255,255,255,.18);
-      border-radius:18px;
-      color:var(--muted);
-      background: rgba(255,255,255,.03);
-    }
-
-    /* Offer list */
-    .listCards{ display:grid; gap:12px; }
-    .item{
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      padding:14px;
-      display:grid;
-      gap:10px;
-    }
-    .itemTop{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
-    .itemTop b{ font-size:15px; }
-    .tags{ display:flex; gap:8px; flex-wrap:wrap; }
-    .tag{
-      font-size:12px;
-      color: var(--muted);
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(2,6,23,.35);
-    }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
-    .actions .btn{ width:auto; padding:10px 12px; border-radius:14px; }
-
-    /* Toast */
-    .toastWrap{
-      position:fixed; top:14px; right:14px; z-index:200;
-      display:grid; gap:10px;
-      width:min(360px, calc(100% - 28px));
-    }
+    .modalActions{display:flex; justify-content:space-between; gap:10px; margin-top:14px; flex-wrap:wrap}
     .toast{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(2,6,23,.92);
-      border-radius: 18px;
+      position:fixed; right:18px; top:72px; z-index:120;
+      display:grid; gap:10px;
+    }
+    .toast .t{
+      width:min(360px, calc(100vw - 36px));
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(13,20,33,.10);
+      box-shadow:0 20px 50px rgba(16,24,40,.18);
+      border-radius:18px;
       padding:12px 12px;
-      box-shadow: var(--shadow);
-      display:flex; gap:10px; align-items:flex-start;
+      font-weight:800;
+      color:#23304a;
     }
-    .tDot{
-      width:10px; height:10px; border-radius:999px; margin-top:6px;
-      background: var(--blue2);
-      box-shadow: 0 0 0 6px rgba(59,130,246,.12);
-      flex: 0 0 auto;
-    }
-    .toast.good .tDot{
-      background: var(--good);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
-    }
-    .toast.bad .tDot{
-      background: var(--bad);
-      box-shadow: 0 0 0 6px rgba(239,68,68,.12);
-    }
-    .tText b{ display:block; margin-bottom:2px; }
-    .tText span{ color:var(--muted); font-size:13px; line-height:1.5; }
+    .t small{display:block; margin-top:4px; color:var(--muted); font-weight:650}
 
-    /* Responsive */
+    /* Mobile */
+    .mobileNav{
+      display:none;
+      position:fixed; left:0; right:0; bottom:0;
+      z-index:60;
+      background:rgba(255,255,255,.82);
+      backdrop-filter: blur(12px);
+      border-top:1px solid rgba(13,20,33,.08);
+      padding:10px 14px;
+    }
+    .mobileNav .bar{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+    }
+    .mbtn{
+      display:grid; place-items:center;
+      padding:10px 10px;
+      border-radius:16px;
+      border:1px solid rgba(13,20,33,.10);
+      background:white;
+      font-weight:850;
+      color:#22304a;
+    }
+    .mbtn.active{
+      border-color:rgba(30,99,255,.28);
+      background:rgba(30,99,255,.06);
+    }
+
     @media (max-width: 980px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .grid2{ grid-template-columns: 1fr; }
-      .split{ grid-template-columns: 1fr; }
-      .fgrid{ grid-template-columns: 1fr; }
+      .heroGrid{grid-template-columns:1fr}
+      .actions{min-width:auto}
+      .brand{min-width:auto}
     }
     @media (max-width: 820px){
-      .nav{ display:none; }
-      .hamb{ display:inline-grid; place-items:center; }
-      .mnav.show{ display:block; }
-    }
-    @media (max-width: 520px){
-      .heroH1{ font-size:34px; }
+      .nav{display:none}
+      h1{font-size:40px}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .footGrid{grid-template-columns:1fr}
+      .mobileNav{display:block}
+      body{padding-bottom:86px}
+      .row2{grid-template-columns:1fr}
     }
   </style>
 </head>
-
 <body>
-  <div class="toastWrap" id="toastWrap"></div>
 
-  <div class="header">
+  <!-- Toast container -->
+  <div class="toast" id="toast"></div>
+
+  <header class="topbar">
     <div class="wrap">
-      <div class="hrow">
-        <div class="brand" role="button" tabindex="0" onclick="goHome()">
+      <div class="row">
+        <div class="brand">
           <div class="logo">B</div>
           <div>
-            <div style="line-height:1; font-size:16px;">BerberimGelsin</div>
-            <div class="tiny" style="margin-top:3px;">Önizleme • Demo</div>
+            <b>BerberimGelsin</b>
+            <small>Önizleme • Demo</small>
           </div>
         </div>
 
-        <div class="nav" aria-label="sayfa menüsü">
-          <a href="#nasil" onclick="smartScroll(event,'nasil')">Nasıl Çalışır</a>
-          <a href="#guvenlik" onclick="smartScroll(event,'guvenlik')">Güvenlik</a>
-          <a href="#kategoriler" onclick="smartScroll(event,'kategoriler')">Kategoriler</a>
-          <a href="#fiyat" onclick="smartScroll(event,'fiyat')">Fiyatlandırma</a>
-          <a href="#sss" onclick="smartScroll(event,'sss')">SSS</a>
-        </div>
+        <nav class="nav" aria-label="Sayfa menüsü">
+          <a href="#nasil" data-scroll>Nasıl Çalışır</a>
+          <a href="#guvenlik" data-scroll>Güvenlik</a>
+          <a href="#kategori" data-scroll>Kategoriler</a>
+          <a href="#fiyat" data-scroll>Fiyatlandırma</a>
+          <a href="#sss" data-scroll>SSS</a>
+        </nav>
 
-        <div class="right">
-          <span class="badge" id="userBadge" style="display:none;"></span>
-          <button class="btn ghost" id="btnLogin" onclick="openAuth()">Giriş Yap</button>
-          <button class="btn primary" id="btnSignup" onclick="openAuth(true)">Kayıt Ol</button>
-          <button class="hamb" aria-label="mobil menü" onclick="toggleMobileMenu()">☰</button>
+        <div class="actions">
+          <button class="btn ghost small" id="btnLogin">Giriş Yap</button>
+          <button class="btn orange small" id="btnRegister">Kayıt Ol</button>
+          <div class="pill" id="userPill" title="Demo oturumu">
+            👤 <span id="pillText">Ziyaretçi</span>
+          </div>
         </div>
-      </div>
-
-      <div class="mnav" id="mnav">
-        <a href="#nasil" onclick="smartScroll(event,'nasil'); toggleMobileMenu(true)">Nasıl Çalışır</a>
-        <a href="#guvenlik" onclick="smartScroll(event,'guvenlik'); toggleMobileMenu(true)">Güvenlik</a>
-        <a href="#kategoriler" onclick="smartScroll(event,'kategoriler'); toggleMobileMenu(true)">Kategoriler</a>
-        <a href="#fiyat" onclick="smartScroll(event,'fiyat'); toggleMobileMenu(true)">Fiyatlandırma</a>
-        <a href="#sss" onclick="smartScroll(event,'sss'); toggleMobileMenu(true)">SSS</a>
-        <a href="#" onclick="openLegal('privacy'); toggleMobileMenu(true)">Gizlilik</a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- LANDING -->
-  <div class="hero">
+  <main>
     <div class="wrap">
-      <div class="heroGrid">
-        <div class="heroCard">
-          <div class="pill">
-            <span class="badge">⚡ 3 adımda randevu</span>
-            <span class="badge">✅ Onaylı profesyoneller</span>
-            <span class="badge">📍 Konum bazlı</span>
-          </div>
-
-          <h1 class="heroH1">
-            Kişisel Bakım İçin<br/>
-            <span class="accentO">Sıra Bekleme.</span>
-          </h1>
-
-          <p class="heroP">
-            Berber & kuaför hizmetini evine, ofisine ya da oteline çağır.
-            Müşteri ilan açar, berberler teklif verir — sen seçersin.
-          </p>
-
-          <div class="heroActions">
-            <button class="btn primary" onclick="openAuth(true)">Hemen Başla</button>
-            <button class="btn blue" onclick="smartScroll(event,'nasil')">Nasıl Çalışır?</button>
-            <button class="btn" onclick="smartScroll(event,'fiyat')">Fiyatı Gör</button>
-          </div>
-
-          <div class="heroMini">
-            <span class="badge">🔒 KVKK • Gizlilik</span>
-            <span class="badge">📩 SMS doğrulama (demo)</span>
-            <span class="badge">💳 Nakit / Online (demo)</span>
-          </div>
-
-          <div class="mt16 tiny">
-            Not: Bu sayfa yatırımcı/kullanıcı incelemesi için demo önizlemedir. Gerçek sistemde tüm ayarlar admin panelden yönetilir.
-          </div>
-        </div>
-
-        <div class="sideCard">
-          <div class="sideTop">
-            <b>Demo Durumu</b>
-            <span class="badge">🟢 Çalışıyor</span>
-          </div>
-
-          <div class="stat">
-            <b>OTP</b>
-            <span>Varsayılan kod: <b style="color:#fff">123456</b> (demo)</span>
-          </div>
-          <div class="stat">
-            <b>Cüzdan</b>
-            <span>Berber komisyon simülasyonu: %20 (değişken oran destekli altyapı)</span>
-          </div>
-          <div class="stat">
-            <b>Paylaşılabilir</b>
-            <span>GitHub Pages üzerinde. Instagram bio linki olarak kullanabilirsin.</span>
-          </div>
-
-          <button class="btn ghost" onclick="openLegal('kvkk')">KVKK Metni (Demo)</button>
-          <button class="btn" onclick="openHelp()">Demo Nasıl Test Edilir?</button>
-
-          <div class="tiny">Gizli “Demo Ayarları” için: <b>Ctrl + Shift + D</b></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="section" id="nasil">
-    <div class="wrap">
-      <div class="titleRow">
-        <h2 class="h2">Nasıl Çalışır?</h2>
-        <span class="badge">Müşteri ilan açar • Berber teklif verir</span>
-      </div>
-
-      <div class="grid3">
-        <div class="card">
-          <div class="icon">📌</div>
-          <h3>1) İlan Aç</h3>
-          <p>
-            Hizmeti, aciliyeti (Acil/Normal) ve “kaç saat içinde” seç.
-            Ödeme tipini belirt (Nakit/Online).
-          </p>
-        </div>
-        <div class="card">
-          <div class="icon">✂️</div>
-          <h3>2) Teklifleri Gör</h3>
-          <p>
-            Yakındaki berberler fiyat ve “kaç dakikada gelirim” teklifleri gönderir.
-            En uygunu seç.
-          </p>
-        </div>
-        <div class="card">
-          <div class="icon">✅</div>
-          <h3>3) Onayla & Puanla</h3>
-          <p>
-            Onay sonrası randevu oluşur.
-            Hizmet bitince puan ve yorum sistemi devreye girer (demo).
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="guvenlik">
-    <div class="wrap">
-      <div class="titleRow">
-        <h2 class="h2">Sadece Onaylı Profesyoneller</h2>
-        <span class="badge">Kimlik • Belge • Hijyen</span>
-      </div>
-
-      <div class="grid3">
-        <div class="card">
-          <div class="icon">🪪</div>
-          <h3>Kimlik Doğrulama</h3>
-          <p>Berber/kuaför kayıtları onay sürecinden geçer. (Gerçekte admin panelden.)</p>
-        </div>
-        <div class="card">
-          <div class="icon">🏅</div>
-          <h3>Mesleki Yeterlilik</h3>
-          <p>Ustalık/kalfa belgeleri ve ekipman fotoğrafları zorunlu alanlardır.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🧼</div>
-          <h3>Hijyen Standartları</h3>
-          <p>Hijyen ihlali şikayetleri ve spam kontrol kayıt altına alınır (demo log).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="kategoriler">
-    <div class="wrap">
-      <div class="titleRow">
-        <h2 class="h2">Kategoriler</h2>
-        <span class="badge">Kadın • Erkek • Çocuk • Bakım</span>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <div class="icon">🧔</div>
-          <h3>Erkek Berberi</h3>
-          <p>Saç kesimi, sakal tıraşı, bakım.</p>
-        </div>
-        <div class="card">
-          <div class="icon">👩</div>
-          <h3>Kadın Kuaförü</h3>
-          <p>Fön, boya, şekillendirme, bakım.</p>
-        </div>
-        <div class="card">
-          <div class="icon">👶</div>
-          <h3>Çocuk Tıraşı</h3>
-          <p>Çocuklara özel, sabırlı ve hijyenik hizmet.</p>
-        </div>
-        <div class="card">
-          <div class="icon">💅</div>
-          <h3>Manikür & Bakım</h3>
-          <p>Bakım, tırnak, özel paketler.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="fiyat">
-    <div class="wrap">
-      <div class="titleRow">
-        <h2 class="h2">Fiyatlandırma</h2>
-        <span class="badge">Müşteri ücretsiz • Berber komisyon</span>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <div class="icon">🙋</div>
-          <h3>Müşteriler İçin</h3>
-          <div class="price">Ücretsiz</div>
-          <div class="priceSmall">Üyelik ücreti yok • Sadece hizmet bedeli</div>
-          <ul class="list">
-            <li class="li"><span class="tick">✓</span><span>İlan açma & teklif toplama</span></li>
-            <li class="li"><span class="tick">✓</span><span>Nakit veya online ödeme seçimi (demo)</span></li>
-            <li class="li"><span class="tick">✓</span><span>Puan & yorum sistemi (demo)</span></li>
-          </ul>
-          <div class="mt16">
-            <button class="btn blue" onclick="openAuth(true)">Müşteri Olarak Başla</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="icon">✂️</div>
-          <h3>Berberler / Kuaförler İçin</h3>
-          <div class="price">%20</div>
-          <div class="priceSmall">Hizmet başına komisyon • Cüzdan simülasyonu</div>
-          <ul class="list">
-            <li class="li"><span class="tick">✓</span><span>Teklif gönder, randevu kazan</span></li>
-            <li class="li"><span class="tick">✓</span><span>Nakit ödemede komisyon cüzdandan düşer (demo)</span></li>
-            <li class="li"><span class="tick">✓</span><span>Profil & uzmanlık yönetimi (demo)</span></li>
-          </ul>
-          <div class="mt16">
-            <button class="btn primary" onclick="openAuth(true,'barber')">Berber Olarak Başla</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="sss">
-    <div class="wrap">
-      <div class="titleRow">
-        <h2 class="h2">SSS</h2>
-        <span class="badge">Demo • Tek dosya • localStorage</span>
-      </div>
-
-      <div class="faq">
-        <details>
-          <summary>Bu linki Instagram’da paylaşabilir miyim? <span class="muted">+</span></summary>
-          <p>Evet. GitHub Pages URL’in herkese açık. Bio’ya koyup “demo” olarak gösterebilirsin.</p>
-        </details>
-        <details>
-          <summary>Admin panel neden yok? <span class="muted">+</span></summary>
-          <p>Bu sayfa statik demo. Admin panel, gerçek backend (Laravel/Filament) ile ayrı yayına alınır. İstersen onu da sonraki adımda planlarız.</p>
-        </details>
-        <details>
-          <summary>OTP (SMS doğrulama) gerçek mi? <span class="muted">+</span></summary>
-          <p>Şimdilik demo: kod <b>123456</b>. Gerçekte NetGSM/VatanSMS/yurtdışı SMS sağlayıcısı API ile bağlanacak. Bu demo, akışı göstermek için.</p>
-        </details>
-        <details>
-          <summary>Nakit/Online ödeme nasıl olacak? <span class="muted">+</span></summary>
-          <p>Bu demo sürümde sadece seçim var. Gerçekte PayTR/Shopier ile online ödeme; nakitte ise komisyon cüzdandan otomatik düşecek.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- APP (after login) -->
-  <div class="app" id="app">
-    <div class="wrap">
-      <div class="titleRow">
-        <div>
-          <h2 class="h2" id="appTitle">Panel</h2>
-          <div class="muted" id="appSub">Demo paneli</div>
-        </div>
-        <div class="right">
-          <button class="btn" onclick="openHelp()">Test Senaryosu</button>
-          <button class="btn ghost" onclick="logout()">Çıkış</button>
-        </div>
-      </div>
-
-      <div class="tabs" id="tabs"></div>
-
-      <div class="panel">
-        <div class="pHead">
-          <div class="pTitle" id="panelTitle">İşlemler</div>
-          <div class="badge" id="walletBadge" style="display:none;"></div>
-        </div>
-        <div class="pBody" id="panelBody"></div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="wrap">
-      <div class="fgrid">
-        <div>
-          <div class="brand">
-            <div class="logo">B</div>
-            <div>
-              <div style="font-weight:900">BerberimGelsin</div>
-              <div class="tiny">Teknoloji & ustalığı buluşturan yeni nesil kişisel bakım pazaryeri (demo).</div>
-            </div>
-          </div>
-          <div class="mt12 tiny">© <span id="year"></span> BerberimGelsin • Önizleme</div>
-        </div>
-        <div class="flinks">
-          <div class="tiny" style="margin:4px 0 10px;">Kurumsal</div>
-          <a href="#" onclick="openLegal('about')">Hakkımızda</a>
-          <a href="#" onclick="openLegal('contact')">İletişim</a>
-        </div>
-        <div class="flinks">
-          <div class="tiny" style="margin:4px 0 10px;">Yasal</div>
-          <a href="#" onclick="openLegal('kvkk')">KVKK Aydınlatma</a>
-          <a href="#" onclick="openLegal('privacy')">Gizlilik Politikası</a>
-          <a href="#" onclick="openLegal('cookie')">Çerez Politikası</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- AUTH MODAL -->
-  <div class="modal" id="authModal" aria-hidden="true">
-    <div class="modalBox">
-      <div class="mHead">
-        <div class="mTitle" id="authTitle">Kayıt / Giriş</div>
-        <button class="mClose" onclick="closeAuth()">✕</button>
-      </div>
-      <div class="mBody" id="authBody"></div>
-      <div class="mFoot" id="authFoot"></div>
-    </div>
-  </div>
-
-  <!-- LEGAL MODAL -->
-  <div class="modal" id="legalModal" aria-hidden="true">
-    <div class="modalBox">
-      <div class="mHead">
-        <div class="mTitle" id="legalTitle">Yasal</div>
-        <button class="mClose" onclick="closeLegal()">✕</button>
-      </div>
-      <div class="mBody">
-        <div class="muted" id="legalText" style="line-height:1.75"></div>
-      </div>
-      <div class="mFoot">
-        <button class="btn" onclick="closeLegal()">Kapat</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- HELP MODAL -->
-  <div class="modal" id="helpModal" aria-hidden="true">
-    <div class="modalBox">
-      <div class="mHead">
-        <div class="mTitle">Demo Test Senaryosu</div>
-        <button class="mClose" onclick="closeHelp()">✕</button>
-      </div>
-      <div class="mBody" style="color:var(--muted); line-height:1.75">
-        <b style="color:#fff">Müşteri akışı:</b><br/>
-        1) Kayıt Ol → Rol: Müşteri → Telefon → OTP: 123456<br/>
-        2) Panel → “İlan Aç” → Acil/Normal + 2-3-4 saat + ödeme seç<br/>
-        3) İlan oluşunca “Teklifler” sekmesinde bekle<br/><br/>
-        <b style="color:#fff">Berber akışı:</b><br/>
-        1) Çıkış → Kayıt Ol → Rol: Berber → OTP: 123456<br/>
-        2) “İlanlar” sekmesinde müşteri ilanını gör → Teklif ver<br/>
-        3) Müşteri teklif onaylayınca nakitse komisyon cüzdandan düşer (demo).<br/><br/>
-        <span class="tiny">Not: Bu sayfa demo olduğu için tüm veriler tarayıcı localStorage’ında tutulur.</span>
-      </div>
-      <div class="mFoot">
-        <button class="btn primary" onclick="closeHelp()">Tamam</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- DEMO SETTINGS (hidden shortcut) -->
-  <div class="modal" id="demoModal" aria-hidden="true">
-    <div class="modalBox">
-      <div class="mHead">
-        <div class="mTitle">Demo Ayarları (Gizli)</div>
-        <button class="mClose" onclick="closeDemo()">✕</button>
-      </div>
-      <div class="mBody">
-        <div class="grid2">
+      <div class="hero">
+        <div class="heroGrid">
+          <!-- Left hero -->
           <div class="card">
-            <h3 style="margin:0 0 6px;">OTP Zorunluluğu</h3>
-            <p class="muted">Demo testlerinde OTP adımını kapatabilirsin.</p>
-            <div class="mt12">
-              <button class="btn blue" onclick="toggleOtp()"><span id="otpBtnText">OTP: Açık</span></button>
+            <div class="cardPad">
+              <div class="badges">
+                <span class="badge"><span class="dot orange"></span> 3 adımda randevu</span>
+                <span class="badge"><span class="dot green"></span> Onaylı profesyoneller</span>
+                <span class="badge"><span class="dot blue"></span> Konum bazlı</span>
+              </div>
+
+              <h1>Kişisel Bakım İçin<br/><span class="accent">Sıra Bekleme.</span></h1>
+              <p class="sub">
+                Berber & kuaför hizmetini evine, ofisine ya da oteline çağır.
+                <b>Müşteri ilan açar</b>, profesyoneller <b>teklif verir</b> — sen seçersin.
+              </p>
+
+              <div class="ctaRow">
+                <button class="btn orange" id="btnStart">Hemen Başla</button>
+                <button class="btn primary" data-scrollto="#nasil">Nasıl Çalışır?</button>
+                <button class="btn ghost" data-scrollto="#fiyat">Fiyatı Gör</button>
+              </div>
+
+              <div class="miniRow" aria-label="özellik etiketleri">
+                <span class="miniTag" id="tagLegal">
+                  🔒 KVKK • Gizlilik
+                </span>
+                <span class="miniTag" id="tagOtp">
+                  📩 SMS doğrulama (demo)
+                </span>
+                <span class="miniTag" id="tagPay">
+                  💳 Nakit / Online (plan)
+                </span>
+              </div>
+
+              <p class="hint" style="margin-top:14px">
+                Not: Bu sayfa yatırımcı/kullanıcı incelemesi için yayınlanan demo önizlemedir.
+                Gerçek sistemde tüm ayarlar <b>admin panelinden</b> yönetilecektir.
+              </p>
             </div>
           </div>
-          <div class="card">
-            <h3 style="margin:0 0 6px;">Verileri Sıfırla</h3>
-            <p class="muted">Demo verilerini temizler (ilanlar, teklifler, oturum).</p>
-            <div class="mt12">
-              <button class="btn" onclick="hardReset()">Sıfırla</button>
+
+          <!-- Right status -->
+          <div class="card soft">
+            <div class="cardPad">
+              <div class="statusTitle">
+                <h3>Demo Durumu</h3>
+                <span class="live"><span class="dot green"></span> Çalışıyor</span>
+              </div>
+
+              <div class="kv">
+                <div class="item">
+                  <b>OTP</b>
+                  <span>Varsayılan kod: <b>123456</b> (demo)</span>
+                </div>
+
+                <div class="item">
+                  <b>Cüzdan / Komisyon</b>
+                  <span>Komisyon: %20 (demo). İleride berbere özel oran desteği.</span>
+                </div>
+
+                <div class="item">
+                  <b>Paylaşılabilir</b>
+                  <span>GitHub Pages üzerinde. Instagram bio linki olarak kullanabilirsin.</span>
+                </div>
+
+                <div class="btnrow">
+                  <button class="btn ghost" id="btnKvkk">KVKK Metni</button>
+                  <button class="btn primary" id="btnHowTest">Demo Nasıl Test Edilir?</button>
+                </div>
+
+                <p class="hint" style="margin:6px 0 0">
+                  Gizli “Demo Ayarları” için: <b>Ctrl + Shift + D</b>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="tiny mt12">Kısayol: Ctrl+Shift+D</div>
       </div>
-      <div class="mFoot">
-        <button class="btn" onclick="closeDemo()">Kapat</button>
+
+      <!-- How it works -->
+      <section id="nasil">
+        <div class="secHead">
+          <div>
+            <h2>Nasıl Çalışır?</h2>
+            <p>Yemeksepeti mantığı — ama berber/kuaför için.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile orange">
+            <div class="icon" aria-hidden="true">
+              <!-- pin -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22s7-4.6 7-12a7 7 0 1 0-14 0c0 7.4 7 12 7 12Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h4>1) Konumunu seç</h4>
+            <p>Ev, ofis, otel… Neredeysen oraya gelsin.</p>
+          </div>
+
+          <div class="tile">
+            <div class="icon" aria-hidden="true">
+              <!-- scissors -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 17a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 4 9.5 14.5" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20 9.5 9.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h4>2) İlan aç & hizmeti belirle</h4>
+            <p>Saç, sakal, bakım… İstersen “Acil / Normal” seç.</p>
+          </div>
+
+          <div class="tile">
+            <div class="icon" aria-hidden="true">
+              <!-- star -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="m12 2 3 7 7 .6-5.3 4.6 1.7 7-6.4-3.9-6.4 3.9 1.7-7L2 9.6 9 9l3-7Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h4>3) Teklifleri gör, seç & puanla</h4>
+            <p>Profesyoneller gelir, hizmet biter — puan ver (makas puanı).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section id="guvenlik">
+        <div class="secHead">
+          <div>
+            <h2>Güvenlik Önceliğimiz</h2>
+            <p>Onaylı profesyoneller, doğrulama ve spam kontrolü.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="icon" aria-hidden="true">
+              <!-- id -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M7.5 18c1.2-2 8-2 9 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h4>Kimlik & Belge Doğrulama</h4>
+            <p>Berber/kuaför belgesi ve ekipman fotoğrafları admin onayından geçer.</p>
+          </div>
+
+          <div class="tile orange">
+            <div class="icon" aria-hidden="true">
+              <!-- shield -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 20 6v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4Z" stroke="currentColor" stroke-width="2"/>
+                <path d="m9 12 2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>SMS / Email Doğrulama</h4>
+            <p>Demo OTP: 123456. Gerçekte NetGSM / VatanSMS / yabancı provider seçimi admin panelden.</p>
+          </div>
+
+          <div class="tile">
+            <div class="icon" aria-hidden="true">
+              <!-- ban -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M5.2 5.2 18.8 18.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h4>Spam & İletişim Engeli</h4>
+            <p>Telefon/WhatsApp/email paylaşımı otomatik filtrelenir. Şüpheli davranışlar loglanır.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section id="kategori">
+        <div class="secHead">
+          <div>
+            <h2>Kategoriler</h2>
+            <p>Türkiye’den başlayıp dünyaya açılacak çok dilli yapı.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <div class="icon" aria-hidden="true">👨‍🦱</div>
+            <h4>Erkek Berberi</h4>
+            <p>Saç kesimi, sakal, bakım.</p>
+          </div>
+          <div class="tile orange">
+            <div class="icon" aria-hidden="true">👩‍🦰</div>
+            <h4>Kadın Kuaförü</h4>
+            <p>Saç, boya, fön, bakım hizmetleri.</p>
+          </div>
+          <div class="tile orange">
+            <div class="icon" aria-hidden="true">💅</div>
+            <h4>Manikür & Bakım</h4>
+            <p>Evde pratik kişisel bakım.</p>
+          </div>
+          <div class="tile">
+            <div class="icon" aria-hidden="true">🧒</div>
+            <h4>Çocuk Tıraşı</h4>
+            <p>Aile dostu, güvenli hizmet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="fiyat">
+        <div class="secHead">
+          <div>
+            <h2>Fiyatlandırma Mantığı</h2>
+            <p>Müşteri ücretsiz. Profesyonel üye olur, iş başına komisyon alınır.</p>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <div class="priceCard">
+            <div class="tag">🧑‍💼 Müşteriler için</div>
+            <p class="big"><b>Ücretsiz</b> <span style="color:var(--muted); font-weight:700; font-size:14px">/ üyelik</span></p>
+            <p class="hint">Sadece aldığın hizmetin bedelini ödersin. Ödeme: nakit veya online (seçilebilir).</p>
+            <ul class="list">
+              <li><span class="check">✓</span> İlan aç, teklif topla, seç</li>
+              <li><span class="check">✓</span> Konum bazlı eşleşme</li>
+              <li><span class="check">✓</span> Makas puanı & yorumlar</li>
+            </ul>
+            <div class="ctaRow" style="margin-top:14px">
+              <button class="btn primary" id="btnCustomer">Hemen Kaydol</button>
+            </div>
+          </div>
+
+          <div class="priceCard">
+            <div class="tag" style="border-color:rgba(255,122,0,.28); background:rgba(255,122,0,.06)">✂️ Berber/Kuaför için</div>
+            <p class="big"><b>%20</b> <span style="color:var(--muted); font-weight:700; font-size:14px">/ hizmet başı</span></p>
+            <p class="hint">Komisyon oranı her berbere özel ayarlanabilir (plan). Bakiye/cüzdan ile otomatik düşüm.</p>
+            <ul class="list">
+              <li><span class="check">✓</span> Onaylı profil + belge yükleme</li>
+              <li><span class="check">✓</span> Müsaitlik & süre teklif etme</li>
+              <li><span class="check">✓</span> Daha fazla müşteri, düşük maliyet</li>
+            </ul>
+            <div class="ctaRow" style="margin-top:14px">
+              <button class="btn orange" id="btnProvider">Berber Ol</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="sss">
+        <div class="secHead">
+          <div>
+            <h2>SSS</h2>
+            <p>Yatırımcı ve kullanıcı sorularına hızlı cevap.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details open>
+            <summary>Bu demo gerçek sistem mi? <span>＋</span></summary>
+            <p>Bu sayfa “paylaşılabilir demo”dur. Şu an tek dosya çalışır. Gerçek sürümde admin panel, ödeme ve SMS servisleri entegre olur.</p>
+          </details>
+          <details>
+            <summary>Müşteri ilan açınca ne oluyor? <span>＋</span></summary>
+            <p>Müşteri konum/hizmet/“acil-normal” seçerek ilan açar. Yakındaki profesyoneller teklif verir: fiyat + gelebileceği süre + randevu saati.</p>
+          </details>
+          <details>
+            <summary>İletişim paylaşımı nasıl engellenir? <span>＋</span></summary>
+            <p>Mesaj ve profil alanlarında telefon/email/WhatsApp desenleri filtrelenir. Şüpheli girişimler loglanır ve admin panelden aksiyon alınır.</p>
+          </details>
+          <details>
+            <summary>Ödeme nakit olursa komisyon nasıl kesilecek? <span>＋</span></summary>
+            <p>Plan: Berber cüzdanından komisyon otomatik düşer. Böylece sistem dışına kaçışın etkisi azalır. Online ödeme için PayTR/Shopier hedeflenir.</p>
+          </details>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <div class="footGrid">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px">
+              <div class="logo" style="width:34px;height:34px;border-radius:12px">B</div>
+              <div>
+                <b>BerberimGelsin</b>
+                <div class="copy">Teknoloji ve ustalığı buluşturan yeni nesil kişisel bakım platformu.</div>
+              </div>
+            </div>
+            <div class="copy">© <span id="year"></span> BerberimGelsin • Demo Önizleme</div>
+          </div>
+
+          <div class="footLinks">
+            <a href="#" data-legal="hakkimizda">Hakkımızda</a>
+            <a href="#" data-legal="iletisim">İletişim</a>
+            <a href="#" data-legal="kvkk">KVKK Aydınlatma</a>
+            <a href="#" data-legal="gizlilik">Gizlilik Politikası</a>
+            <a href="#" data-legal="cerez">Çerez Politikası</a>
+            <a href="#" data-legal="sartlar">Hizmet Şartları</a>
+          </div>
+        </div>
       </div>
+    </footer>
+  </main>
+
+  <!-- Mobile nav -->
+  <div class="mobileNav" role="navigation" aria-label="Mobil menü">
+    <div class="bar">
+      <button class="mbtn" data-scrollto="#nasil">Nasıl</button>
+      <button class="mbtn" data-scrollto="#kategori">Kategoriler</button>
+      <button class="mbtn" data-scrollto="#fiyat">Fiyat</button>
+      <button class="mbtn" id="mStart">Başla</button>
     </div>
   </div>
 
-<script>
-/* ---------------------------
-   State / Storage helpers
----------------------------- */
-const LS = {
-  get(k, fallback=null){
-    try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; }
-    catch(e){ return fallback; }
-  },
-  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); },
-  del(k){ localStorage.removeItem(k); }
-};
-
-const state = {
-  otpEnabled: LS.get("bg_demo_otp_enabled", true),
-  session: LS.get("bg_session", null), // {id,name,role,phone}
-  users: LS.get("bg_users", []),       // {id,name,role,phone,wallet,commission}
-  requests: LS.get("bg_requests", []), // {id, customerId, title, category, urgency, timeWindow, payment, note, createdAt}
-  offers: LS.get("bg_offers", []),     // {id, requestId, barberId, price, etaMin, createdAt, status}
-  fraud: LS.get("bg_fraud", [])        // {at,type,detail}
-};
-
-function persist(){
-  LS.set("bg_demo_otp_enabled", state.otpEnabled);
-  LS.set("bg_session", state.session);
-  LS.set("bg_users", state.users);
-  LS.set("bg_requests", state.requests);
-  LS.set("bg_offers", state.offers);
-  LS.set("bg_fraud", state.fraud);
-}
-
-function uid(prefix="id"){
-  return prefix+"_"+Math.random().toString(16).slice(2)+Date.now().toString(16);
-}
-
-function nowISO(){ return new Date().toISOString(); }
-
-/* ---------------------------
-   UI helpers
----------------------------- */
-function smartScroll(e, id){
-  if(e) e.preventDefault();
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
-}
-function toggleMobileMenu(forceClose=false){
-  const m = document.getElementById("mnav");
-  if(forceClose){ m.classList.remove("show"); return; }
-  m.classList.toggle("show");
-}
-function goHome(){
-  document.getElementById("app").classList.remove("active");
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-function toast(title, msg="", type="info"){
-  const wrap = document.getElementById("toastWrap");
-  const el = document.createElement("div");
-  el.className = "toast "+(type==="good"?"good":type==="bad"?"bad":"");
-  el.innerHTML = `
-    <div class="tDot"></div>
-    <div class="tText">
-      <b>${escapeHtml(title)}</b>
-      <span>${escapeHtml(msg)}</span>
+  <!-- Auth / Legal Modal -->
+  <div class="backdrop" id="backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHead">
+        <b id="modalTitle">Kayıt / Giriş (Demo)</b>
+        <button class="x" id="closeModal" aria-label="Kapat">✕</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
     </div>
-  `;
-  wrap.appendChild(el);
-  setTimeout(()=>{ el.style.opacity="0"; el.style.transform="translateY(-6px)"; }, 2600);
-  setTimeout(()=>{ el.remove(); }, 3200);
-}
+  </div>
 
-function escapeHtml(s){
-  return String(s ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-/* ---------------------------
-   Legal modal
----------------------------- */
-function openLegal(kind){
-  const t = {
-    kvkk: "KVKK Aydınlatma Metni (Demo)",
-    privacy: "Gizlilik Politikası (Demo)",
-    cookie: "Çerez Politikası (Demo)",
-    about: "Hakkımızda (Demo)",
-    contact: "İletişim (Demo)"
-  };
-  const p = {
-    kvkk: `Bu metin demo amaçlıdır. Gerçek sistemde KVKK/aydınlatma metinleri admin panelden yönetilir.
-Kullanıcı (müşteri) ve sağlayıcı (berber/kuaför) hesapları doğrulama, randevu ve ödeme süreçleri kapsamında veri işlenebilir.
-Bu sayfa yatırımcı/kullanıcı incelemesi için hazırlanmıştır.`,
-    privacy: `Bu metin demo amaçlıdır. Gerçek yayında kişisel verilerin işlenmesi, saklama süreleri, güvenlik tedbirleri ve üçüncü taraf entegrasyonları (SMS/Ödeme) detaylı şekilde açıklanır.
-Şu anki demo yalnızca tarayıcı localStorage’ında veri tutar.`,
-    cookie: `Bu metin demo amaçlıdır. Gerçek yayında performans/analitik/işlevsel çerezler ve tercih yönetimi paneli bulunur.
-Bu demo sayfasında yalnızca oturum simülasyonu için localStorage kullanılır.`,
-    about: `BerberimGelsin, berber/kuaför hizmetini kapına getiren konum bazlı bir pazaryeri girişimidir.
-Bu sayfa demo önizlemedir.`,
-    contact: `Demo iletişim alanı. Gerçek sistemde destek e-posta/telefon ve şikayet süreçleri yer alır.`
-  };
-
-  document.getElementById("legalTitle").innerText = t[kind] || "Yasal";
-  document.getElementById("legalText").innerText = p[kind] || "Demo metni.";
-  document.getElementById("legalModal").classList.add("active");
-}
-function closeLegal(){ document.getElementById("legalModal").classList.remove("active"); }
-
-/* ---------------------------
-   Help modal
----------------------------- */
-function openHelp(){ document.getElementById("helpModal").classList.add("active"); }
-function closeHelp(){ document.getElementById("helpModal").classList.remove("active"); }
-
-/* ---------------------------
-   Demo settings (hidden)
----------------------------- */
-function openDemo(){
-  document.getElementById("demoModal").classList.add("active");
-  document.getElementById("otpBtnText").innerText = state.otpEnabled ? "OTP: Açık" : "OTP: Kapalı";
-}
-function closeDemo(){ document.getElementById("demoModal").classList.remove("active"); }
-function toggleOtp(){
-  state.otpEnabled = !state.otpEnabled;
-  persist();
-  document.getElementById("otpBtnText").innerText = state.otpEnabled ? "OTP: Açık" : "OTP: Kapalı";
-  toast("Demo ayarı güncellendi", "OTP " + (state.otpEnabled ? "Açıldı" : "Kapandı"), "good");
-}
-function hardReset(){
-  if(!confirm("Demo verileri sıfırlansın mı?")) return;
-  localStorage.removeItem("bg_demo_otp_enabled");
-  localStorage.removeItem("bg_session");
-  localStorage.removeItem("bg_users");
-  localStorage.removeItem("bg_requests");
-  localStorage.removeItem("bg_offers");
-  localStorage.removeItem("bg_fraud");
-  location.reload();
-}
-
-/* ---------------------------
-   Auth flow
----------------------------- */
-let auth = { isSignup:true, forcedRole:null, step:0, role:null, phone:"", name:"", otp:"" };
-
-function openAuth(isSignup=false, forcedRole=null){
-  auth = { isSignup: !!isSignup, forcedRole, step:0, role:null, phone:"", name:"", otp:"" };
-  document.getElementById("authModal").classList.add("active");
-  renderAuth();
-}
-function closeAuth(){
-  document.getElementById("authModal").classList.remove("active");
-}
-function renderAuth(){
-  const title = document.getElementById("authTitle");
-  const body  = document.getElementById("authBody");
-  const foot  = document.getElementById("authFoot");
-
-  const mode = auth.isSignup ? "Kayıt Ol" : "Giriş Yap";
-  title.innerText = mode + " • Demo";
-
-  // Step 0: role
-  if(auth.step === 0){
-    body.innerHTML = `
-      <div class="row">
-        <div class="badge">Adım 1/3 • Rol seçimi</div>
-        <div class="grid2">
-          <div class="card" style="cursor:pointer" onclick="setRole('customer')">
-            <div class="icon">🙋</div>
-            <h3>Müşteri</h3>
-            <p>İlan aç, teklifleri gör, randevu oluştur.</p>
-          </div>
-          <div class="card" style="cursor:pointer" onclick="setRole('barber')">
-            <div class="icon">✂️</div>
-            <h3>Berber / Kuaför</h3>
-            <p>Teklif ver, randevu al, cüzdan & komisyon.</p>
-          </div>
-        </div>
-        <div class="tiny">Not: Gerçek sistemde kullanıcı türü seçimi kayıt akışında belirlenir.</div>
-      </div>
-    `;
-    foot.innerHTML = `
-      <button class="btn" onclick="closeAuth()">Vazgeç</button>
-    `;
-    if(auth.forcedRole){
-      setRole(auth.forcedRole);
-    }
-    return;
-  }
-
-  // Step 1: phone
-  if(auth.step === 1){
-    body.innerHTML = `
-      <div class="row">
-        <div class="badge">Adım 2/3 • Telefon doğrulama</div>
-        <div class="field">
-          <label>Telefon</label>
-          <input id="phone" placeholder="örn: 5551234567" value="${escapeHtml(auth.phone)}" inputmode="tel"/>
-        </div>
-        <div class="tiny">Demo OTP kodu: <b style="color:#fff">123456</b> ${state.otpEnabled ? "" : "(OTP kapalı)"}.</div>
-      </div>
-    `;
-    foot.innerHTML = `
-      <button class="btn" onclick="auth.step=0; renderAuth()">Geri</button>
-      <button class="btn primary" onclick="nextPhone()">Devam</button>
-    `;
-    return;
-  }
-
-  // Step 2: otp + name
-  if(auth.step === 2){
-    const otpBox = state.otpEnabled ? `
-      <div class="field">
-        <label>SMS Kod (Demo)</label>
-        <input id="otp" placeholder="123456" value="${escapeHtml(auth.otp)}" inputmode="numeric"/>
-      </div>
-    ` : `
-      <div class="badge">OTP kapalı (Demo ayarı)</div>
-    `;
-
-    body.innerHTML = `
-      <div class="row">
-        <div class="badge">Adım 3/3 • Profil</div>
-        ${otpBox}
-        <div class="field">
-          <label>Ad Soyad</label>
-          <input id="name" placeholder="örn: Selman S." value="${escapeHtml(auth.name)}"/>
-        </div>
-        <div class="tiny">Spam/iletişim bilgisi paylaşımı (telefon/e-posta) alanlarda engellenecek şekilde tasarlanır. Demo’da temel kontrol var.</div>
-      </div>
-    `;
-    foot.innerHTML = `
-      <button class="btn" onclick="auth.step=1; renderAuth()">Geri</button>
-      <button class="btn primary" onclick="finishAuth()">Girişi Tamamla</button>
-    `;
-    return;
-  }
-}
-
-function setRole(role){
-  auth.role = role;
-  auth.step = 1;
-  renderAuth();
-}
-
-function nextPhone(){
-  const phone = (document.getElementById("phone")?.value || "").trim();
-  if(phone.length < 8){
-    toast("Telefon eksik", "Lütfen geçerli bir numara gir.", "bad");
-    return;
-  }
-  auth.phone = phone;
-  toast("Kod gönderildi (demo)", state.otpEnabled ? "OTP: 123456" : "OTP kapalı", "good");
-  auth.step = 2;
-  renderAuth();
-}
-
-function finishAuth(){
-  if(state.otpEnabled){
-    const otp = (document.getElementById("otp")?.value || "").trim();
-    if(otp !== "123456"){
-      toast("OTP hatalı", "Demo kodu 123456", "bad");
-      return;
-    }
-    auth.otp = otp;
-  }
-  const name = (document.getElementById("name")?.value || "").trim();
-  if(name.length < 2){
-    toast("İsim eksik", "Ad soyad gir.", "bad");
-    return;
-  }
-  auth.name = name;
-
-  // create/find user
-  let user = state.users.find(u => u.phone === auth.phone && u.role === auth.role);
-  if(!user){
-    user = {
-      id: uid("u"),
-      role: auth.role,
-      phone: auth.phone,
-      name: auth.name,
-      wallet: auth.role === "barber" ? 1500 : 0,      // demo başlangıç
-      commission: auth.role === "barber" ? 20 : 0     // demo default
+  <script>
+    // ---------------------------
+    // Utilities
+    // ---------------------------
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => [...el.querySelectorAll(q)];
+    const store = {
+      get(k, d=null){ try{ return JSON.parse(localStorage.getItem(k)) ?? d }catch(e){ return d } },
+      set(k, v){ localStorage.setItem(k, JSON.stringify(v)) },
+      del(k){ localStorage.removeItem(k) }
     };
-    state.users.push(user);
-  }else{
-    // update name if changed
-    user.name = auth.name;
-  }
 
-  state.session = { id:user.id, role:user.role, name:user.name, phone:user.phone };
-  persist();
-  closeAuth();
-  toast("Giriş başarılı", (user.role==="customer" ? "Müşteri paneline geçildi." : "Berber paneline geçildi."), "good");
-  refreshHeader();
-  openApp();
-}
-
-/* ---------------------------
-   Header/session
----------------------------- */
-function refreshHeader(){
-  const s = state.session;
-  const badge = document.getElementById("userBadge");
-  const btnLogin = document.getElementById("btnLogin");
-  const btnSignup = document.getElementById("btnSignup");
-
-  if(!s){
-    badge.style.display="none";
-    btnLogin.style.display="";
-    btnSignup.style.display="";
-    return;
-  }
-  badge.style.display="inline-flex";
-  badge.textContent = (s.role==="customer" ? "🙋 Müşteri" : "✂️ Berber") + " • " + s.name;
-  btnLogin.style.display="none";
-  btnSignup.style.display="none";
-}
-
-function logout(){
-  state.session = null;
-  persist();
-  toast("Çıkış yapıldı", "Landing sayfasına döndün.", "good");
-  refreshHeader();
-  document.getElementById("app").classList.remove("active");
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-/* ---------------------------
-   App panels / tabs
----------------------------- */
-function openApp(){
-  document.getElementById("app").classList.add("active");
-  const s = state.session;
-  if(!s) return;
-
-  const appTitle = document.getElementById("appTitle");
-  const appSub   = document.getElementById("appSub");
-  const walletBadge = document.getElementById("walletBadge");
-
-  const u = state.users.find(x=>x.id===s.id);
-  const tabs = document.getElementById("tabs");
-  tabs.innerHTML = "";
-
-  if(s.role==="customer"){
-    appTitle.textContent = "Müşteri Paneli";
-    appSub.textContent = "İlan aç • Teklifleri karşılaştır • Onayla";
-    walletBadge.style.display="none";
-    addTab("ilan", "İlan Aç", true);
-    addTab("teklifler", "Teklifler", false);
-    addTab("randevu", "Randevu", false);
-    renderCustomer("ilan");
-  }else{
-    appTitle.textContent = "Berber Paneli";
-    appSub.textContent = "İlanları gör • Teklif ver • Cüzdan/komisyon";
-    walletBadge.style.display="inline-flex";
-    walletBadge.textContent = "Cüzdan: ₺" + (u?.wallet ?? 0) + " • Komisyon: %" + (u?.commission ?? 20);
-    addTab("ilanlar", "İlanlar", true);
-    addTab("isler", "İşlerim", false);
-    addTab("cuzdan", "Cüzdan", false);
-    renderBarber("ilanlar");
-  }
-
-  window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
-}
-
-function addTab(key, label, active){
-  const t = document.createElement("button");
-  t.className = "tab"+(active?" active":"");
-  t.textContent = label;
-  t.onclick = ()=>selectTab(key);
-  t.dataset.key = key;
-  document.getElementById("tabs").appendChild(t);
-}
-
-function selectTab(key){
-  document.querySelectorAll(".tab").forEach(x=>{
-    x.classList.toggle("active", x.dataset.key === key);
-  });
-  const s = state.session;
-  if(!s) return;
-  if(s.role==="customer") renderCustomer(key);
-  else renderBarber(key);
-}
-
-/* ---------------------------
-   Spam / contact filter
----------------------------- */
-function containsContactInfo(text){
-  if(!text) return false;
-  const t = text.toLowerCase();
-  const hasEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(t);
-  const hasPhone = /(\+?\d[\d\s().-]{7,}\d)/.test(t); // rough phone
-  const hasWp = /(whatsapp|wp|w\.a|wa\.me)/i.test(t);
-  return hasEmail || hasPhone || hasWp;
-}
-function logFraud(type, detail){
-  state.fraud.unshift({ at: nowISO(), type, detail });
-  state.fraud = state.fraud.slice(0,50);
-  persist();
-}
-
-/* ---------------------------
-   Customer screens
----------------------------- */
-function renderCustomer(view){
-  document.getElementById("panelTitle").textContent =
-    view==="ilan" ? "İlan Oluştur" : view==="teklifler" ? "Teklifler" : "Randevu";
-
-  const body = document.getElementById("panelBody");
-  const s = state.session;
-  const myRequests = state.requests.filter(r=>r.customerId===s.id).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
-
-  if(view==="ilan"){
-    body.innerHTML = `
-      <div class="split">
-        <div class="card">
-          <h3 style="margin-top:0">Yeni İlan</h3>
-          <div class="row">
-            <div class="row2">
-              <div class="field">
-                <label>Kategori</label>
-                <select id="c_category">
-                  <option>Erkek Berberi</option>
-                  <option>Kadın Kuaförü</option>
-                  <option>Çocuk Tıraşı</option>
-                  <option>Manikür & Bakım</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Acil Durum</label>
-                <select id="c_urgency">
-                  <option value="Acil">Acil</option>
-                  <option value="Normal" selected>Normal</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row2">
-              <div class="field">
-                <label>Kaç saat içinde?</label>
-                <select id="c_timewindow">
-                  <option value="2 saat">2 saat</option>
-                  <option value="3 saat" selected>3 saat</option>
-                  <option value="4 saat">4 saat</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Ödeme</label>
-                <select id="c_payment">
-                  <option value="Nakit" selected>Nakit</option>
-                  <option value="Online">Online (PayTR/Shopier - demo)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field">
-              <label>Not (adres detay, istek)</label>
-              <textarea id="c_note" placeholder="Örn: Oteldeyim, oda 204. Sakal + saç."></textarea>
-              <div class="tiny">Telefon/e-posta yazma. (Demo spam kontrolü)</div>
-            </div>
-
-            <button class="btn primary" onclick="createRequest()">İlanı Yayınla</button>
-            <div class="tiny">İlan yayınlanınca berberler “İlanlar” sekmesinde görür.</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">İlanlarım</h3>
-          ${myRequests.length ? `<div class="listCards" id="myReqList"></div>` : `<div class="empty">Henüz ilanın yok. Soldan ilan açabilirsin.</div>`}
-        </div>
-      </div>
-    `;
-    if(myRequests.length){
-      const list = document.getElementById("myReqList");
-      list.innerHTML = myRequests.map(r=>renderRequestCard(r,true)).join("");
+    function toast(title, desc=""){
+      const wrap = $("#toast");
+      const el = document.createElement("div");
+      el.className = "t";
+      el.innerHTML = `${title}${desc?`<small>${desc}</small>`:""}`;
+      wrap.appendChild(el);
+      setTimeout(()=>{ el.style.opacity=".0"; el.style.transform="translateY(-4px)"; el.style.transition=".2s"; }, 2400);
+      setTimeout(()=> el.remove(), 2800);
     }
-    return;
-  }
 
-  if(view==="teklifler"){
-    if(!myRequests.length){
-      body.innerHTML = `<div class="empty">Teklif görmek için önce bir ilan aç.</div>`;
-      return;
+    function smoothScrollTo(sel){
+      const target = document.querySelector(sel);
+      if(!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 74;
+      window.scrollTo({ top, behavior:"smooth" });
     }
-    const latest = myRequests[0];
-    const offers = state.offers.filter(o=>o.requestId===latest.id).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
 
-    body.innerHTML = `
-      <div class="card">
-        <h3 style="margin-top:0">Son İlanın</h3>
-        ${renderRequestCard(latest,false)}
-      </div>
-      <div class="mt16"></div>
-      <div class="card">
-        <h3 style="margin-top:0">Gelen Teklifler</h3>
-        ${offers.length ? `<div class="listCards">${offers.map(o=>renderOfferCard(o,true)).join("")}</div>` : `<div class="empty">Henüz teklif yok. Biraz bekle ya da ilan detayını güncelle.</div>`}
-      </div>
-    `;
-    return;
-  }
+    // ---------------------------
+    // Demo Session
+    // ---------------------------
+    const DEMO = {
+      otpCode: "123456",
+      otpEnabled: true, // toggled with Ctrl+Shift+D
+      commissionDefault: 20,
+      user: store.get("bg_user", null), // {role, first, last, phone}
+    };
 
-  // randevu
-  const accepted = state.offers.find(o=>o.status==="accepted" && myRequests.some(r=>r.id===o.requestId));
-  if(!accepted){
-    body.innerHTML = `<div class="empty">Henüz onaylanmış randevu yok. “Teklifler” sekmesinden bir teklifi onayla.</div>`;
-    return;
-  }
-  const req = state.requests.find(r=>r.id===accepted.requestId);
-  const barber = state.users.find(u=>u.id===accepted.barberId);
-  body.innerHTML = `
-    <div class="card">
-      <h3 style="margin-top:0">Onaylı Randevu</h3>
-      <div class="tags">
-        <span class="tag">Berber: ${escapeHtml(barber?.name || "—")}</span>
-        <span class="tag">Fiyat: ₺${accepted.price}</span>
-        <span class="tag">Geliş: ${accepted.etaMin} dk</span>
-        <span class="tag">Ödeme: ${escapeHtml(req?.payment || "-")}</span>
-      </div>
-      <div class="mt12 muted">Demo: Gerçek sistemde burada canlı takip, chat, iptal/iade ve puanlama akışları olur.</div>
-    </div>
-  `;
-}
-
-function createRequest(){
-  const category = document.getElementById("c_category").value;
-  const urgency = document.getElementById("c_urgency").value;
-  const timeWindow = document.getElementById("c_timewindow").value;
-  const payment = document.getElementById("c_payment").value;
-  const note = document.getElementById("c_note").value.trim();
-
-  if(containsContactInfo(note)){
-    toast("Spam engeli", "Not alanında telefon/e-posta paylaşımı algılandı.", "bad");
-    logFraud("contact_share_attempt", note.slice(0,120));
-    return;
-  }
-
-  const s = state.session;
-  const r = {
-    id: uid("r"),
-    customerId: s.id,
-    title: `${category} • ${urgency}`,
-    category, urgency, timeWindow, payment,
-    note,
-    createdAt: nowISO()
-  };
-  state.requests.unshift(r);
-  persist();
-  toast("İlan yayınlandı", "Berberlere iletildi (demo).", "good");
-  renderCustomer("ilan");
-  // switch to offers tab
-  selectTab("teklifler");
-}
-
-function renderRequestCard(r, showDelete){
-  const t = `
-    <div class="item">
-      <div class="itemTop">
-        <div>
-          <b>${escapeHtml(r.title)}</b>
-          <div class="tags mt8">
-            <span class="tag">${escapeHtml(r.category)}</span>
-            <span class="tag">${escapeHtml(r.timeWindow)}</span>
-            <span class="tag">Ödeme: ${escapeHtml(r.payment)}</span>
-          </div>
-        </div>
-        ${showDelete ? `<button class="btn" onclick="deleteRequest('${r.id}')">Sil</button>` : ``}
-      </div>
-      ${r.note ? `<div class="muted">${escapeHtml(r.note)}</div>` : `<div class="muted">Not yok.</div>`}
-    </div>
-  `;
-  return t;
-}
-function deleteRequest(id){
-  if(!confirm("İlan silinsin mi?")) return;
-  state.requests = state.requests.filter(r=>r.id!==id);
-  state.offers = state.offers.filter(o=>o.requestId!==id);
-  persist();
-  toast("İlan silindi", "Teklifler de kaldırıldı.", "good");
-  renderCustomer("ilan");
-}
-
-/* ---------------------------
-   Barber screens
----------------------------- */
-function renderBarber(view){
-  document.getElementById("panelTitle").textContent =
-    view==="ilanlar" ? "Yakındaki İlanlar (Demo)" : view==="isler" ? "İşlerim" : "Cüzdan & Log";
-
-  const body = document.getElementById("panelBody");
-  const s = state.session;
-  const me = state.users.find(u=>u.id===s.id);
-
-  // Update wallet badge
-  const walletBadge = document.getElementById("walletBadge");
-  walletBadge.textContent = "Cüzdan: ₺" + (me?.wallet ?? 0) + " • Komisyon: %" + (me?.commission ?? 20);
-
-  if(view==="ilanlar"){
-    const reqs = [...state.requests].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,20);
-    body.innerHTML = `
-      <div class="split">
-        <div class="card">
-          <h3 style="margin-top:0">İlanlar</h3>
-          ${reqs.length ? `<div class="listCards">${reqs.map(r=>renderRequestForBarber(r)).join("")}</div>` : `<div class="empty">Henüz ilan yok. Bir müşteri ilan açınca burada görünür.</div>`}
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">Spam / Güvenlik (Demo)</h3>
-          <div class="muted">Numara/e-posta paylaşımı girişimleri burada loglanır.</div>
-          <div class="mt12"></div>
-          ${state.fraud.length ? `<div class="listCards">${state.fraud.slice(0,8).map(f=>`
-            <div class="item">
-              <div class="itemTop"><b>${escapeHtml(f.type)}</b><span class="tag">${new Date(f.at).toLocaleString()}</span></div>
-              <div class="muted">${escapeHtml(f.detail)}</div>
-            </div>
-          `).join("")}</div>` : `<div class="empty">Henüz log yok.</div>`}
-        </div>
-      </div>
-    `;
-    return;
-  }
-
-  if(view==="isler"){
-    const mine = state.offers
-      .filter(o=>o.barberId===s.id)
-      .sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
-
-    body.innerHTML = `
-      <div class="card">
-        <h3 style="margin-top:0">Tekliflerim</h3>
-        ${mine.length ? `<div class="listCards">${mine.map(o=>renderOfferCard(o,false)).join("")}</div>` : `<div class="empty">Henüz teklif vermedin.</div>`}
-      </div>
-    `;
-    return;
-  }
-
-  // wallet
-  body.innerHTML = `
-    <div class="grid2">
-      <div class="card">
-        <h3 style="margin-top:0">Cüzdan</h3>
-        <div class="price">₺${me?.wallet ?? 0}</div>
-        <div class="muted">Demo bakiye. Gerçekte tahsilat/komisyon/çekim akışları olur.</div>
-        <div class="mt16">
-          <button class="btn blue" onclick="topUp()">Demo Bakiye Ekle</button>
-        </div>
-      </div>
-      <div class="card">
-        <h3 style="margin-top:0">Komisyon Oranı</h3>
-        <div class="muted">Her berbere özel komisyon ayarlanabilir (demo).</div>
-        <div class="mt12 row2">
-          <div class="field">
-            <label>%</label>
-            <input id="comm" value="${me?.commission ?? 20}" inputmode="numeric"/>
-          </div>
-          <div style="display:grid; align-content:end;">
-            <button class="btn primary" onclick="saveCommission()">Kaydet</button>
-          </div>
-        </div>
-        <div class="tiny mt8">Not: Gerçekte bu işlem admin panelden yapılır.</div>
-      </div>
-    </div>
-  `;
-}
-
-function renderRequestForBarber(r){
-  const offers = state.offers.filter(o=>o.requestId===r.id);
-  const myOffer = offers.find(o=>o.barberId===state.session.id);
-  const btn = myOffer
-    ? `<span class="tag">Teklifin var: ₺${myOffer.price} • ${myOffer.etaMin}dk</span>`
-    : `<button class="btn primary" onclick="openOffer('${r.id}')">Teklif Ver</button>`;
-
-  return `
-    <div class="item">
-      <div class="itemTop">
-        <div>
-          <b>${escapeHtml(r.title)}</b>
-          <div class="tags mt8">
-            <span class="tag">${escapeHtml(r.category)}</span>
-            <span class="tag">${escapeHtml(r.urgency)}</span>
-            <span class="tag">${escapeHtml(r.timeWindow)}</span>
-            <span class="tag">Ödeme: ${escapeHtml(r.payment)}</span>
-          </div>
-        </div>
-        <div class="actions">${btn}</div>
-      </div>
-      <div class="muted">${r.note ? escapeHtml(r.note) : "Not yok."}</div>
-    </div>
-  `;
-}
-
-/* Offer modal (reuse auth modal UI for simplicity) */
-function openOffer(requestId){
-  const r = state.requests.find(x=>x.id===requestId);
-  if(!r){ toast("Hata", "İlan bulunamadı.", "bad"); return; }
-
-  const body = document.getElementById("authBody");
-  const foot = document.getElementById("authFoot");
-  document.getElementById("authTitle").innerText = "Teklif Ver • Demo";
-
-  body.innerHTML = `
-    <div class="row">
-      <div class="badge">İlan</div>
-      ${renderRequestCard(r,false)}
-      <div class="row2">
-        <div class="field">
-          <label>Fiyat (₺)</label>
-          <input id="o_price" placeholder="örn: 450" inputmode="numeric"/>
-        </div>
-        <div class="field">
-          <label>Kaç dk’da gelirim?</label>
-          <input id="o_eta" placeholder="örn: 35" inputmode="numeric"/>
-        </div>
-      </div>
-      <div class="tiny">Not: Bu demo. Gerçekte müsaitlik, rota, chat vb. olur.</div>
-    </div>
-  `;
-  foot.innerHTML = `
-    <button class="btn" onclick="closeAuth()">Vazgeç</button>
-    <button class="btn primary" onclick="submitOffer('${r.id}')">Teklifi Gönder</button>
-  `;
-  document.getElementById("authModal").classList.add("active");
-}
-
-function submitOffer(requestId){
-  const price = parseInt((document.getElementById("o_price")?.value || "").trim(), 10);
-  const eta = parseInt((document.getElementById("o_eta")?.value || "").trim(), 10);
-  if(!price || price < 50){ toast("Fiyat hatalı", "Geçerli bir fiyat gir.", "bad"); return; }
-  if(!eta || eta < 5){ toast("Süre hatalı", "Geçerli bir dakika gir.", "bad"); return; }
-
-  const s = state.session;
-  const exists = state.offers.find(o=>o.requestId===requestId && o.barberId===s.id);
-  if(exists){
-    exists.price = price;
-    exists.etaMin = eta;
-    exists.createdAt = nowISO();
-    persist();
-    closeAuth();
-    toast("Teklif güncellendi", `₺${price} • ${eta} dk`, "good");
-    renderBarber("ilanlar");
-    return;
-  }
-
-  state.offers.unshift({
-    id: uid("o"),
-    requestId,
-    barberId: s.id,
-    price, etaMin: eta,
-    createdAt: nowISO(),
-    status: "pending"
-  });
-  persist();
-  closeAuth();
-  toast("Teklif gönderildi", `₺${price} • ${eta} dk`, "good");
-  renderBarber("ilanlar");
-}
-
-function renderOfferCard(o, forCustomer){
-  const req = state.requests.find(r=>r.id===o.requestId);
-  const barber = state.users.find(u=>u.id===o.barberId);
-  const statusTag = o.status==="accepted" ? `<span class="tag" style="border-color:rgba(34,197,94,.25);color:#bff4cf">Onaylandı</span>` :
-                    o.status==="rejected" ? `<span class="tag" style="border-color:rgba(239,68,68,.25);color:#ffd0d0">Reddedildi</span>` :
-                    `<span class="tag">Beklemede</span>`;
-
-  const action = forCustomer && o.status==="pending"
-    ? `<button class="btn primary" onclick="acceptOffer('${o.id}')">Onayla</button>
-       <button class="btn" onclick="rejectOffer('${o.id}')">Reddet</button>`
-    : ``;
-
-  return `
-    <div class="item">
-      <div class="itemTop">
-        <div>
-          <b>${forCustomer ? escapeHtml(barber?.name || "Berber") : "Teklif"} • ₺${o.price} • ${o.etaMin} dk</b>
-          <div class="tags mt8">
-            ${req ? `<span class="tag">${escapeHtml(req.category)}</span><span class="tag">Ödeme: ${escapeHtml(req.payment)}</span>` : ``}
-            ${statusTag}
-          </div>
-        </div>
-        <div class="actions">${action}</div>
-      </div>
-      <div class="muted">${req?.note ? escapeHtml(req.note) : "—"}</div>
-    </div>
-  `;
-}
-
-function acceptOffer(offerId){
-  const offer = state.offers.find(o=>o.id===offerId);
-  if(!offer) return;
-
-  // mark others rejected for that request
-  state.offers.forEach(o=>{
-    if(o.requestId===offer.requestId){
-      o.status = (o.id===offerId) ? "accepted" : "rejected";
-    }
-  });
-
-  const req = state.requests.find(r=>r.id===offer.requestId);
-  const barber = state.users.find(u=>u.id===offer.barberId);
-  if(req && barber){
-    // If cash, deduct commission from barber wallet (demo)
-    if(req.payment === "Nakit"){
-      const rate = barber.commission ?? 20;
-      const fee = Math.round((offer.price * rate) / 100);
-      if((barber.wallet ?? 0) < fee){
-        toast("Yetersiz bakiye", "Berber cüzdanında komisyon için bakiye yok (demo).", "bad");
-        logFraud("wallet_insufficient", `barber=${barber.id} fee=${fee}`);
-        // revert
-        state.offers.forEach(o=>{
-          if(o.requestId===offer.requestId) o.status = "pending";
-        });
-        persist();
-        return;
+    function updateUserPill(){
+      const pill = $("#userPill");
+      const txt = $("#pillText");
+      if(DEMO.user){
+        const name = `${DEMO.user.first} ${DEMO.user.last}`.trim();
+        txt.textContent = `${DEMO.user.role} • ${name || "Kullanıcı"}`;
+        pill.style.borderColor = "rgba(30,99,255,.20)";
+      }else{
+        txt.textContent = "Ziyaretçi";
+        pill.style.borderColor = "rgba(13,20,33,.10)";
       }
-      barber.wallet = (barber.wallet ?? 0) - fee;
-      toast("Randevu onaylandı", `Nakit ödeme • Komisyon ₺${fee} cüzdandan düştü (demo).`, "good");
-    }else{
-      toast("Randevu onaylandı", "Online ödeme akışı demo (PayTR/Shopier bağlanacak).", "good");
     }
-  }
 
-  persist();
-  renderCustomer("randevu");
-  // show app section for user
-  openApp();
-}
+    // ---------------------------
+    // Modal builder
+    // ---------------------------
+    const modal = {
+      open(title, html){
+        $("#modalTitle").textContent = title;
+        $("#modalBody").innerHTML = html;
+        $("#backdrop").style.display = "flex";
+      },
+      close(){
+        $("#backdrop").style.display = "none";
+      }
+    };
 
-function rejectOffer(offerId){
-  const offer = state.offers.find(o=>o.id===offerId);
-  if(!offer) return;
-  offer.status = "rejected";
-  persist();
-  toast("Teklif reddedildi", "Diğer teklifleri inceleyebilirsin.", "good");
-  renderCustomer("teklifler");
-}
+    $("#closeModal").addEventListener("click", modal.close);
+    $("#backdrop").addEventListener("click", (e)=>{
+      if(e.target.id === "backdrop") modal.close();
+    });
 
-function topUp(){
-  const s = state.session;
-  const me = state.users.find(u=>u.id===s.id);
-  me.wallet = (me.wallet ?? 0) + 500;
-  persist();
-  toast("Demo bakiye eklendi", "+₺500", "good");
-  renderBarber("cuzdan");
-}
+    // ---------------------------
+    // Legal texts (demo placeholders)
+    // ---------------------------
+    const LEGAL = {
+      hakkimizda: {
+        title: "Hakkımızda (Demo)",
+        body: `
+          <p class="hint">
+            BerberimGelsin, evde/yerinde berber & kuaför hizmetini güvenli ve doğrulanmış profesyonellerle buluşturmayı hedefler.
+            Bu sayfa demo önizlemedir.
+          </p>`
+      },
+      iletisim: {
+        title: "İletişim (Demo)",
+        body: `<p class="hint">Bu demo sayfasında iletişim bilgileri örnektir. Gerçek sürümde admin panelden yönetilecektir.</p>`
+      },
+      kvkk: {
+        title: "KVKK Aydınlatma Metni (Demo)",
+        body: `<p class="hint">Kişisel veriler; hizmetin sunulması, güvenlik ve yasal yükümlülükler amacıyla işlenir. (Demo metin)</p>`
+      },
+      gizlilik: {
+        title: "Gizlilik Politikası (Demo)",
+        body: `<p class="hint">Veri güvenliği, erişim kontrolü ve kayıt politikaları gerçek sistemde admin panel ve altyapı üzerinden yönetilecektir. (Demo)</p>`
+      },
+      cerez: {
+        title: "Çerez Politikası (Demo)",
+        body: `<p class="hint">Bu demo sayfası sadece localStorage kullanır. Üretimde çerez yönetimi modülü olacaktır.</p>`
+      },
+      sartlar: {
+        title: "Hizmet Şartları (Demo)",
+        body: `<p class="hint">Platform kullanım şartları ve komisyon koşulları sözleşme ile belirlenir. (Demo)</p>`
+      }
+    };
 
-function saveCommission(){
-  const val = parseInt((document.getElementById("comm")?.value || "").trim(), 10);
-  if(isNaN(val) || val < 0 || val > 50){
-    toast("Geçersiz oran", "0-50 arası gir.", "bad"); return;
-  }
-  const s = state.session;
-  const me = state.users.find(u=>u.id===s.id);
-  me.commission = val;
-  persist();
-  toast("Komisyon güncellendi", "%"+val, "good");
-  renderBarber("cuzdan");
-}
+    function openLegal(key){
+      const l = LEGAL[key] || LEGAL.kvkk;
+      modal.open(l.title, `
+        <div class="formGrid">
+          ${l.body}
+          <div class="modalActions">
+            <button class="btn ghost" onclick="modal.close()">Kapat</button>
+          </div>
+        </div>
+      `);
+    }
 
-/* ---------------------------
-   init
----------------------------- */
-document.getElementById("year").textContent = new Date().getFullYear();
+    // ---------------------------
+    // Auth Flow (Demo)
+    // ---------------------------
+    const FLOW = {
+      step: 0,
+      mode: "register", // register | login
+      role: "Müşteri",
+      phone: "",
+      first: "",
+      last: "",
+      kvkk: false,
+      otp: ""
+    };
 
-refreshHeader();
+    function stepperHTML(active){
+      const steps = ["Rol", "Telefon", "OTP", "Profil"];
+      return `<div class="stepper">${
+        steps.map((s,i)=>`<span class="step ${i===active?'active':''}">${i+1}) ${s}</span>`).join("")
+      }</div>`;
+    }
 
-if(state.session){
-  toast("Oturum bulundu", "Kaldığın yerden devam.", "good");
-  openApp();
-}
+    function renderAuth(){
+      const isReg = FLOW.mode === "register";
+      const title = isReg ? "Kayıt Ol (Demo)" : "Giriş Yap (Demo)";
 
-// keyboard shortcut for demo settings
-window.addEventListener("keydown", (e)=>{
-  if(e.ctrlKey && e.shiftKey && (e.key==="D" || e.key==="d")){
-    e.preventDefault();
-    openDemo();
-  }
-});
-</script>
+      let body = "";
+      body += stepperHTML(FLOW.step);
+
+      if(FLOW.step === 0){
+        body += `
+          <div class="formGrid">
+            <div>
+              <label>Rol seç</label>
+              <div class="seg">
+                <button class="${FLOW.role==='Müşteri'?'active':''}" id="roleCustomer">Müşteri</button>
+                <button class="${FLOW.role==='Berber'?'active':''}" id="roleProvider">Berber</button>
+              </div>
+              <div class="hint" style="margin-top:8px">
+                Müşteri: ilan açar • Berber/Kuaför: teklif verir ve onay sürecinden geçer.
+              </div>
+            </div>
+
+            <div class="modalActions">
+              <button class="btn ghost" onclick="modal.close()">Vazgeç</button>
+              <button class="btn ${isReg?'orange':'primary'}" id="goPhone">Devam Et</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if(FLOW.step === 1){
+        body += `
+          <div class="formGrid">
+            <div>
+              <label>Telefon</label>
+              <input id="phone" placeholder="Örn: 5551234567" inputmode="numeric" value="${FLOW.phone || ""}"/>
+              <div class="hint">Demo: Her numara kabul. Gerçekte SMS sağlayıcıları admin panelden seçilir.</div>
+            </div>
+            <div class="modalActions">
+              <button class="btn ghost" id="backRole">Geri</button>
+              <button class="btn ${isReg?'orange':'primary'}" id="sendOtp">${DEMO.otpEnabled ? "Kod Gönder" : "OTP Kapalı → Devam"}</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if(FLOW.step === 2){
+        body += `
+          <div class="formGrid">
+            <div>
+              <label>OTP (Demo)</label>
+              <input id="otp" placeholder="123456" inputmode="numeric" value="${FLOW.otp || ""}"/>
+              <div class="hint">Varsayılan demo kodu: <b>${DEMO.otpCode}</b></div>
+            </div>
+            <div class="modalActions">
+              <button class="btn ghost" id="backPhone">Geri</button>
+              <button class="btn ${isReg?'orange':'primary'}" id="verifyOtp">Doğrula</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if(FLOW.step === 3){
+        body += `
+          <div class="formGrid">
+            <div class="row2">
+              <div>
+                <label>Ad</label>
+                <input id="first" placeholder="Ad" value="${FLOW.first || ""}"/>
+              </div>
+              <div>
+                <label>Soyad</label>
+                <input id="last" placeholder="Soyad" value="${FLOW.last || ""}"/>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:flex-start">
+              <input type="checkbox" id="kvkk" style="width:18px;height:18px;margin-top:3px" ${FLOW.kvkk ? "checked":""}/>
+              <div>
+                <div style="font-weight:850">KVKK & Gizlilik onayı</div>
+                <div class="hint">Demo. Üretimde metinler admin panelden yönetilir.</div>
+              </div>
+            </div>
+
+            <div class="modalActions">
+              <button class="btn ghost" id="backOtp">Geri</button>
+              <button class="btn ${isReg?'orange':'primary'}" id="finish">${isReg ? "Kaydı Tamamla" : "Giriş Yap"}</button>
+            </div>
+          </div>
+        `;
+      }
+
+      modal.open(title, body);
+
+      // Bind events
+      if(FLOW.step === 0){
+        $("#roleCustomer").onclick = ()=>{ FLOW.role="Müşteri"; renderAuth(); };
+        $("#roleProvider").onclick = ()=>{ FLOW.role="Berber"; renderAuth(); };
+        $("#goPhone").onclick = ()=>{ FLOW.step=1; renderAuth(); };
+      }
+
+      if(FLOW.step === 1){
+        $("#backRole").onclick = ()=>{ FLOW.step=0; renderAuth(); };
+        $("#sendOtp").onclick = ()=>{
+          FLOW.phone = ($("#phone").value || "").trim();
+          if(!FLOW.phone){ toast("Telefon gerekli", "Örn: 5551234567"); return; }
+          if(DEMO.otpEnabled){
+            toast("Doğrulama kodu gönderildi", "Demo kod: 123456");
+            FLOW.step=2; renderAuth();
+          } else {
+            toast("OTP kapalı", "Demo ayarı ile geçildi.");
+            FLOW.step=3; renderAuth();
+          }
+        };
+      }
+
+      if(FLOW.step === 2){
+        $("#backPhone").onclick = ()=>{ FLOW.step=1; renderAuth(); };
+        $("#verifyOtp").onclick = ()=>{
+          FLOW.otp = ($("#otp").value || "").trim();
+          if(FLOW.otp !== DEMO.otpCode){
+            toast("Kod hatalı", "Demo: 123456 yaz");
+            return;
+          }
+          toast("Doğrulandı", "Devam edebilirsin");
+          FLOW.step=3; renderAuth();
+        };
+      }
+
+      if(FLOW.step === 3){
+        $("#backOtp").onclick = ()=>{ FLOW.step = DEMO.otpEnabled ? 2 : 1; renderAuth(); };
+        $("#finish").onclick = ()=>{
+          FLOW.first = ($("#first").value || "").trim();
+          FLOW.last = ($("#last").value || "").trim();
+          FLOW.kvkk = $("#kvkk").checked;
+
+          if(!FLOW.first || !FLOW.last){ toast("Ad/Soyad gerekli"); return; }
+          if(!FLOW.kvkk){ toast("Onay gerekli", "KVKK kutusunu işaretle"); return; }
+
+          DEMO.user = { role: FLOW.role, first: FLOW.first, last: FLOW.last, phone: FLOW.phone };
+          store.set("bg_user", DEMO.user);
+          updateUserPill();
+          toast("Hoş geldin!", `${DEMO.user.role} oturumu açıldı`);
+          modal.close();
+        };
+      }
+    }
+
+    // ---------------------------
+    // Demo Guide
+    // ---------------------------
+    function openHowToTest(){
+      modal.open("Demo Nasıl Test Edilir?", `
+        <div class="formGrid">
+          <div class="hint">
+            1) Üst menüden <b>Kayıt Ol</b> → Rol seç → Telefon gir → OTP: <b>123456</b> → Profil doldur.<br/>
+            2) Sayfayı yenile (F5). Oturum <b>korunur</b> (localStorage).<br/>
+            3) Footer’dan KVKK/Gizlilik modalını aç.<br/>
+            4) <b>Ctrl + Shift + D</b> ile demo OTP’yi aç/kapat (test amaçlı).
+          </div>
+
+          <div class="modalActions">
+            <button class="btn ghost" onclick="modal.close()">Kapat</button>
+            <button class="btn primary" onclick="renderAuth()">Kayıt Akışını Aç</button>
+          </div>
+        </div>
+      `);
+    }
+
+    // ---------------------------
+    // Events
+    // ---------------------------
+    $("#btnStart").addEventListener("click", ()=>{ FLOW.mode="register"; FLOW.step=0; renderAuth(); });
+    $("#mStart").addEventListener("click", ()=>{ FLOW.mode="register"; FLOW.step=0; renderAuth(); });
+
+    $("#btnRegister").addEventListener("click", ()=>{ FLOW.mode="register"; FLOW.step=0; renderAuth(); });
+    $("#btnLogin").addEventListener("click", ()=>{ FLOW.mode="login"; FLOW.step=0; renderAuth(); });
+
+    $("#btnKvkk").addEventListener("click", ()=> openLegal("kvkk"));
+    $("#btnHowTest").addEventListener("click", openHowToTest);
+    $("#tagLegal").addEventListener("click", ()=> openLegal("gizlilik"));
+    $("#tagOtp").addEventListener("click", ()=> toast("Demo OTP", "Kod: 123456"));
+    $("#tagPay").addEventListener("click", ()=> toast("Ödeme", "Nakit / Online (plan)"));
+
+    $("#btnCustomer").addEventListener("click", ()=>{ FLOW.role="Müşteri"; FLOW.mode="register"; FLOW.step=0; renderAuth(); });
+    $("#btnProvider").addEventListener("click", ()=>{ FLOW.role="Berber"; FLOW.mode="register"; FLOW.step=0; renderAuth(); });
+
+    $$("[data-scroll]").forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        e.preventDefault();
+        smoothScrollTo(a.getAttribute("href"));
+      });
+    });
+    $$("[data-scrollto]").forEach(b=>{
+      b.addEventListener("click", ()=>{
+        smoothScrollTo(b.getAttribute("data-scrollto"));
+      });
+    });
+
+    $$("footer a[data-legal]").forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        e.preventDefault();
+        openLegal(a.getAttribute("data-legal"));
+      });
+    });
+
+    // Demo toggle OTP enabled / disabled
+    document.addEventListener("keydown", (e)=>{
+      if(e.ctrlKey && e.shiftKey && (e.key === "D" || e.key === "d")){
+        DEMO.otpEnabled = !DEMO.otpEnabled;
+        toast("Demo ayarı değişti", `OTP ${DEMO.otpEnabled ? "AÇIK" : "KAPALI"}`);
+      }
+    });
+
+    // Set year
+    $("#year").textContent = new Date().getFullYear();
+
+    // Init
+    updateUserPill();
+  </script>
 </body>
 </html>
