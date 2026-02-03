@@ -1,31 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BerberimGelsin – Önizleme</title>
-  <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#0b1220;color:#fff}
-    .wrap{max-width:980px;margin:0 auto;padding:48px 20px}
-    .card{background:#101a33;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px}
-    .btn{display:inline-block;background:#ff7a18;color:#111;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:700;margin-right:10px}
-    .btn2{display:inline-block;background:#2b6cff;color:#fff;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:700}
-    .muted{opacity:.8}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BerberimGelsin – Önizleme</title>
+
+<style>
+:root{
+  --blue:#2563eb;
+  --orange:#f97316;
+  --dark:#0f172a;
+  --soft:#f8fafc;
+}
+*{box-sizing:border-box;font-family:Inter,system-ui}
+body{margin:0;background:linear-gradient(180deg,#020617,#020617);color:#fff}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none}
+
+/* HEADER */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 24px;position:sticky;top:0;background:#020617cc;
+  backdrop-filter:blur(10px);z-index:50
+}
+.logo{font-weight:800;font-size:20px}
+nav button{
+  margin-left:10px;padding:10px 16px;border-radius:10px;
+  background:#1e293b;color:#fff
+}
+nav .primary{background:var(--orange)}
+
+/* HERO */
+.hero{
+  padding:100px 24px;text-align:center;
+  max-width:1100px;margin:auto
+}
+.hero h1{font-size:44px;line-height:1.2}
+.hero span{color:var(--orange)}
+.hero p{color:#cbd5f5;font-size:18px;max-width:700px;margin:20px auto}
+.hero-actions button{
+  padding:14px 22px;border-radius:14px;font-size:16px;margin:6px
+}
+.hero-actions .primary{background:var(--orange);color:#000}
+.hero-actions .secondary{background:#1e293b}
+
+/* SECTIONS */
+section{padding:80px 24px;max-width:1100px;margin:auto}
+.section-title{text-align:center;font-size:32px;margin-bottom:40px}
+.grid{display:grid;gap:20px}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{
+  background:#020617;border:1px solid #1e293b;
+  padding:24px;border-radius:18px
+}
+.card h3{margin-top:0}
+
+/* PRICING */
+.price{font-size:40px;color:var(--orange)}
+
+/* FOOTER */
+footer{
+  background:#020617;border-top:1px solid #1e293b;
+  padding:40px 24px
+}
+footer .links a{display:block;color:#94a3b8;margin:6px 0}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;background:#000a;
+  display:none;align-items:center;justify-content:center;z-index:100
+}
+.modal.active{display:flex}
+.modal-box{
+  background:#020617;border:1px solid #1e293b;
+  border-radius:20px;padding:24px;width:100%;max-width:420px
+}
+input,select{
+  width:100%;padding:12px;margin:8px 0;
+  border-radius:12px;border:1px solid #334155;
+  background:#020617;color:#fff
+}
+.modal-box button{width:100%;padding:14px;border-radius:12px;margin-top:10px}
+.modal-box .primary{background:var(--orange);color:#000}
+
+/* DASHBOARD */
+.dashboard{display:none;padding:80px 24px;text-align:center}
+.dashboard.active{display:block}
+.badge{
+  display:inline-block;padding:6px 12px;border-radius:20px;
+  background:#1e293b;margin:6px
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .hero h1{font-size:32px}
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <h1>BerberimGelsin <span class="muted">Önizleme</span></h1>
-    <p class="muted">Bu sayfa yatırımcı / kullanıcı incelemesi için yayınlanan demo arayüzdür.</p>
+
+<header>
+  <div class="logo">✂️ BerberimGelsin</div>
+  <nav>
+    <button onclick="openAuth()">Giriş Yap</button>
+    <button class="primary" onclick="openAuth()">Kayıt Ol</button>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Kişisel Bakım İçin <span>Sıra Bekleme</span></h1>
+  <p>Şehrindeki onaylı berber ve kuaförler, istediğin saatte kapına gelsin.</p>
+  <div class="hero-actions">
+    <button class="primary" onclick="openAuth()">Hemen Başla</button>
+    <button class="secondary" onclick="scrollToHow()">Nasıl Çalışır?</button>
+  </div>
+</div>
+
+<section id="how">
+  <h2 class="section-title">3 Adımda Kapında</h2>
+  <div class="grid grid-3">
+    <div class="card"><h3>📍 Konumunu Seç</h3><p>Neredeysen oraya geliriz.</p></div>
+    <div class="card"><h3>✂️ Hizmeti Belirle</h3><p>Saç, sakal, bakım…</p></div>
+    <div class="card"><h3>⭐ Değerlendir</h3><p>Hizmet sonrası puanla.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Fiyatlandırma</h2>
+  <div class="grid grid-3">
     <div class="card">
-      <h2>Demo yakında buraya gelecek ✅</h2>
-      <p class="muted">
-        Şu an GitHub repo boş olduğu için önce index.html’i yayınlıyoruz. Bir sonraki adımda AI Studio’daki
-        tam arayüz kodunu buraya taşıyacağız.
-      </p>
-      <a class="btn" href="#" onclick="alert('Demo akışı bir sonraki adımda eklenecek!');return false;">Hemen Başla</a>
-      <a class="btn2" href="#" onclick="alert('Müşteri / Berber panelleri eklenecek!');return false;">Nasıl Çalışır?</a>
+      <h3>Müşteriler</h3>
+      <div class="price">Ücretsiz</div>
+      <p>Sadece aldığın hizmeti ödersin.</p>
+    </div>
+    <div class="card">
+      <h3>Berberler</h3>
+      <div class="price">%20</div>
+      <p>Hizmet başına komisyon.</p>
     </div>
   </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="#" onclick="openLegal('kvkk')">KVKK</a>
+    <a href="#" onclick="openLegal('privacy')">Gizlilik Politikası</a>
+    <a href="#" onclick="openLegal('cookie')">Çerez Politikası</a>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal" id="authModal">
+  <div class="modal-box">
+    <h3 id="authTitle">Rol Seç</h3>
+    <div id="authStep"></div>
+  </div>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="modal" id="legalModal">
+  <div class="modal-box">
+    <h3 id="legalTitle"></h3>
+    <p id="legalText" style="color:#cbd5f5"></p>
+    <button onclick="closeLegal()">Kapat</button>
+  </div>
+</div>
+
+<!-- DASHBOARDS -->
+<div class="dashboard" id="customerDash">
+  <h2>Müşteri Paneli</h2>
+  <div class="badge">Traş İlanı Aç</div>
+  <div class="badge">Teklifleri Gör</div>
+</div>
+
+<div class="dashboard" id="barberDash">
+  <h2>Berber Paneli</h2>
+  <div class="badge">Müsaitlik Belirle</div>
+  <div class="badge">Teklif Ver</div>
+</div>
+
+<script>
+let role=null,step=0;
+
+function openAuth(){
+  document.getElementById("authModal").classList.add("active");
+  step=0;renderAuth();
+}
+function renderAuth(){
+  const box=document.getElementById("authStep");
+  if(step===0){
+    box.innerHTML=`
+      <button onclick="selectRole('customer')">Müşteri</button>
+      <button onclick="selectRole('barber')">Berber</button>`;
+  }
+  if(step===1){
+    box.innerHTML=`
+      <input placeholder="Telefon (demo)" />
+      <button class="primary" onclick="step=2;renderAuth()">Kod Gönder</button>`;
+  }
+  if(step===2){
+    box.innerHTML=`
+      <input placeholder="OTP (123456)" />
+      <button class="primary" onclick="finishAuth()">Doğrula</button>`;
+  }
+}
+function selectRole(r){role=r;step=1;renderAuth()}
+function finishAuth(){
+  document.getElementById("authModal").classList.remove("active");
+  document.querySelectorAll(".dashboard").forEach(d=>d.classList.remove("active"));
+  if(role==="customer")document.getElementById("customerDash").classList.add("active");
+  if(role==="barber")document.getElementById("barberDash").classList.add("active");
+  window.scrollTo(0,document.body.scrollHeight);
+}
+function scrollToHow(){document.getElementById("how").scrollIntoView({behavior:"smooth"})}
+
+function openLegal(t){
+  const titles={kvkk:"KVKK",privacy:"Gizlilik",cookie:"Çerez Politikası"};
+  document.getElementById("legalTitle").innerText=titles[t];
+  document.getElementById("legalText").innerText="Bu metin demo amaçlıdır. Gerçek sistemde admin panelden yönetilecektir.";
+  document.getElementById("legalModal").classList.add("active");
+}
+function closeLegal(){document.getElementById("legalModal").classList.remove("active")}
+</script>
+
 </body>
 </html>
