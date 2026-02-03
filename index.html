@@ -3,37 +3,42 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>BerberimGelsin — Canlı Demo</title>
+  <title>BerberimGelsin</title>
   <meta name="description" content="Berber & kuaför hizmeti kapında. Müşteri ilan açar, profesyoneller teklif verir — sen seçersin."/>
   <meta name="theme-color" content="#1E63FF"/>
 
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#0b1220;
-      --muted:#5b667a;
-      --line:rgba(13,20,33,.10);
-      --shadow:0 18px 50px rgba(16,24,40,.10);
-      --shadow2:0 10px 26px rgba(16,24,40,.08);
-
+      /* Brand */
       --blue:#1E63FF;
       --blue2:#0B4CFF;
       --orange:#FF7A00;
       --orange2:#FF5F00;
-      --green:#16a34a;
-      --red:#ef4444;
 
-      --max:1120px;
-      --r14:14px;
-      --r18:18px;
+      /* Neutrals */
+      --bg:#ffffff;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#667085;
+      --line:rgba(16,24,40,.10);
+
+      /* Radius / Shadow */
+      --r12:12px;
+      --r16:16px;
+      --r20:20px;
       --r24:24px;
+      --shadow:0 14px 40px rgba(16,24,40,.10);
+      --shadow2:0 10px 26px rgba(16,24,40,.08);
 
+      /* Typography (NOT BOLD) */
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --h1: clamp(30px, 6vw, 52px);
+      --h2: clamp(20px, 4.2vw, 30px);
+      --p:  clamp(14px, 3.6vw, 16px);
+
+      /* Layout */
+      --max:1120px;
       --pad: clamp(14px, 3.6vw, 22px);
-      --h1: clamp(30px, 6.2vw, 54px);
-      --h2: clamp(22px, 4.6vw, 30px);
-      --p:  clamp(14px, 3.5vw, 16.5px);
-
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
     *{box-sizing:border-box}
@@ -41,99 +46,128 @@
     body{
       margin:0; font-family:var(--font); color:var(--text);
       background:
-        radial-gradient(900px 380px at 12% 8%, rgba(30,99,255,.10), transparent 60%),
-        radial-gradient(700px 340px at 82% 14%, rgba(255,122,0,.12), transparent 60%),
+        radial-gradient(900px 380px at 8% 2%, rgba(30,99,255,.10), transparent 62%),
+        radial-gradient(700px 340px at 92% 8%, rgba(255,122,0,.12), transparent 62%),
         var(--bg);
     }
     a{color:inherit; text-decoration:none}
     button,input,select,textarea{font-family:inherit}
-
     .wrap{max-width:var(--max); margin:0 auto; padding:0 16px}
+
+    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(180%) blur(12px);
-      background:rgba(255,255,255,.76);
-      border-bottom:1px solid rgba(13,20,33,.06);
+      background:rgba(255,255,255,.85);
+      backdrop-filter:saturate(180%) blur(14px);
+      border-bottom:1px solid rgba(16,24,40,.08);
     }
     .toprow{
       display:flex; align-items:center; justify-content:space-between;
-      gap:10px; padding:10px 0;
+      padding:10px 0; gap:12px;
     }
     .brand{display:flex; align-items:center; gap:10px; min-width:0}
     .logo{
       width:38px; height:38px; border-radius:14px;
       display:grid; place-items:center;
+      color:#fff;
       background:linear-gradient(135deg,var(--orange),#ffb000);
-      box-shadow:0 10px 22px rgba(255,122,0,.18);
-      color:#fff; font-weight:900;
-      flex:0 0 auto;
+      box-shadow:0 12px 24px rgba(255,122,0,.18);
+      font-weight:700; /* NOT 900 */
     }
-    .brandText{min-width:0}
-    .brandText b{display:block; line-height:1.05}
-    .brandText small{
-      display:block; color:var(--muted); font-weight:700;
+    .btxt{min-width:0}
+    .btxt b{
+      display:block;
+      font-weight:650;
+      letter-spacing:-.01em;
+      line-height:1.05;
+    }
+    .btxt small{
+      display:block;
+      color:var(--muted);
+      font-weight:500;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
       max-width:46vw;
     }
 
-    .nav{display:flex; gap:16px; align-items:center; font-weight:800; color:#27324a}
-    .nav a{opacity:.85}
+    .nav{display:flex; gap:16px; align-items:center}
+    .nav a{
+      color:#24304a;
+      font-weight:550;
+      opacity:.9;
+    }
     .nav a:hover{opacity:1}
 
     .actions{display:flex; gap:8px; align-items:center}
-    .pill{
+    .chipUser{
       display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border-radius:999px;
-      border:1px solid rgba(13,20,33,.10);
-      background:rgba(255,255,255,.95);
-      box-shadow:0 10px 18px rgba(16,24,40,.05);
-      font-weight:850; color:#22304a;
-      max-width:34vw;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(16,24,40,.10);
+      background:rgba(255,255,255,.92);
+      font-weight:550;
+      color:#25314a;
+      max-width:40vw;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
 
+    /* Buttons */
     .btn{
-      border:0; cursor:pointer; font-weight:900;
-      padding:11px 14px; border-radius:14px;
-      display:inline-flex; gap:8px; align-items:center; justify-content:center;
+      border:0; cursor:pointer;
+      padding:11px 14px;
+      border-radius:14px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      font-weight:600;
       transition:.15s transform,.15s box-shadow,.15s opacity;
       white-space:nowrap;
     }
     .btn:active{transform:translateY(1px)}
-    .btn.primary{color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue2)); box-shadow:0 16px 34px rgba(30,99,255,.18)}
-    .btn.orange{color:#fff; background:linear-gradient(135deg,var(--orange),var(--orange2)); box-shadow:0 16px 34px rgba(255,122,0,.18)}
-    .btn.ghost{background:#fff; border:1px solid rgba(13,20,33,.12); color:#1c2740; box-shadow:0 10px 18px rgba(16,24,40,.06)}
-    .btn.small{padding:9px 12px; border-radius:14px; font-weight:900}
+    .btn.primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      box-shadow:0 16px 32px rgba(30,99,255,.18);
+    }
+    .btn.orange{
+      color:#fff;
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      box-shadow:0 16px 32px rgba(255,122,0,.18);
+    }
+    .btn.ghost{
+      color:#1c2740;
+      background:#fff;
+      border:1px solid rgba(16,24,40,.12);
+      box-shadow:0 10px 18px rgba(16,24,40,.06);
+    }
+    .btn.small{padding:9px 12px}
 
     .hamb{display:none}
     .hamb button{
-      width:42px; height:42px; border-radius:14px;
-      border:1px solid rgba(13,20,33,.12);
-      background:#fff; box-shadow:0 10px 18px rgba(16,24,40,.06);
-      font-weight:900; cursor:pointer;
+      width:42px; height:42px;
+      border-radius:14px;
+      border:1px solid rgba(16,24,40,.12);
+      background:#fff;
+      box-shadow:0 10px 18px rgba(16,24,40,.06);
+      cursor:pointer;
+      font-weight:650;
     }
 
-    main{padding:18px 0 30px}
+    /* Cards */
     .card{
       background:rgba(255,255,255,.92);
-      border:1px solid rgba(13,20,33,.08);
+      border:1px solid rgba(16,24,40,.08);
       border-radius:var(--r24);
       box-shadow:var(--shadow);
       overflow:hidden;
     }
     .pad{padding:var(--pad)}
+    main{padding:18px 0 70px} /* space for mobile tabbar */
 
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      align-items:stretch;
-    }
     h1{
       font-size:var(--h1);
-      line-height:1.03;
       margin:0 0 10px;
+      line-height:1.03;
       letter-spacing:-.02em;
+      font-weight:650;
     }
     .accent{
       background:linear-gradient(90deg,var(--orange),#ff9a1a);
@@ -144,130 +178,102 @@
       margin:0 0 14px;
       color:var(--muted);
       font-size:var(--p);
-      line-height:1.55;
-      font-weight:650;
-      max-width:60ch;
+      line-height:1.6;
+      font-weight:450;
+      max-width:62ch;
     }
+    h2{
+      font-size:var(--h2);
+      margin:0 0 6px;
+      letter-spacing:-.01em;
+      font-weight:650;
+    }
+    .muted{color:var(--muted); font-weight:450; line-height:1.6; font-size:14px}
+
+    .gridHero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:stretch;
+    }
+
+    /* Feature rows */
     .badges{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 10px}
     .badge{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(13,20,33,.10);
+      border:1px solid rgba(16,24,40,.10);
       background:rgba(255,255,255,.95);
-      font-weight:850; color:#26324a;
+      color:#24304a;
+      font-weight:520;
       font-size:13px;
     }
     .dot{width:8px; height:8px; border-radius:50%}
     .dot.blue{background:var(--blue)}
     .dot.orange{background:var(--orange)}
-    .dot.green{background:var(--green)}
+    .dot.green{background:#16a34a}
+
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .miniRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .miniTag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(13,20,33,.08);
-      background:rgba(255,255,255,.9);
-      color:#2b3750;
-      font-weight:850;
-      font-size:13px;
-      cursor:pointer;
-    }
-
-    h2{font-size:var(--h2); margin:0 0 8px; letter-spacing:-.02em}
-    .muted{color:var(--muted); font-weight:650; line-height:1.55; font-size:14px}
-
-    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
 
     .tile{
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(13,20,33,.08);
-      border-radius:20px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(16,24,40,.08);
+      border-radius:var(--r20);
       box-shadow:var(--shadow2);
       padding:16px;
     }
-    .tile .icon{
+    .tileHead{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+    .icon{
       width:42px; height:42px; border-radius:14px;
       display:grid; place-items:center;
       background:rgba(30,99,255,.08);
       border:1px solid rgba(30,99,255,.16);
-      margin-bottom:10px;
-      font-weight:900;
+      color:#1c2740;
+      font-weight:650;
     }
-    .tile.orange .icon{
+    .icon.orange{
       background:rgba(255,122,0,.10);
       border-color:rgba(255,122,0,.18);
     }
-    .tile h4{margin:0 0 6px}
-    .tile p{margin:0; color:var(--muted); font-weight:650; line-height:1.5}
+    .tile h4{margin:0; font-weight:650}
+    .tile p{margin:0; color:var(--muted); font-weight:450; line-height:1.6}
 
-    .statusRow{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
-    .live{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      border:1px solid rgba(13,20,33,.10);
-      background:rgba(255,255,255,.95);
-      font-weight:900;
-      font-size:13px;
-    }
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
 
-    .kv{display:grid; gap:10px}
-    .kv .item{
-      border-radius:18px;
-      border:1px solid rgba(13,20,33,.08);
-      background:rgba(255,255,255,.92);
-      padding:14px;
-      box-shadow:0 10px 22px rgba(16,24,40,.06);
-    }
-    .kv .item b{display:block; margin-bottom:6px}
-    .kv .item span{color:var(--muted); font-weight:650}
-
-    footer{
-      border-top:1px solid rgba(13,20,33,.08);
-      background:rgba(255,255,255,.75);
-      padding:22px 0 40px;
-    }
-    .footGrid{display:grid; grid-template-columns:1.2fr .8fr; gap:12px}
-    .footLinks{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px}
-    .footLinks a{
-      padding:10px 12px; border-radius:12px;
-      border:1px solid rgba(13,20,33,.08);
-      background:rgba(255,255,255,.92);
-      font-weight:850; color:#22304a;
-    }
-
-    /* Router Views */
+    /* Views */
     .view{display:none}
     .view.active{display:block}
 
     /* Forms */
-    label{font-weight:900; color:#24304a; font-size:13px}
+    label{font-weight:600; color:#27324a; font-size:13px}
     input,select,textarea{
       width:100%;
       padding:12px 12px;
       border-radius:14px;
-      border:1px solid rgba(13,20,33,.12);
+      border:1px solid rgba(16,24,40,.12);
       outline:none;
-      font-weight:750;
       background:#fff;
+      font-weight:450;
+      color:#111827;
     }
-    input:focus, select:focus, textarea:focus{
+    input:focus,select:focus,textarea:focus{
       border-color:rgba(30,99,255,.45);
       box-shadow:0 0 0 4px rgba(30,99,255,.12);
     }
-    .formGrid{display:grid; gap:10px}
+    textarea{resize:vertical}
+    .form{display:grid; gap:10px}
     .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    .hint{color:var(--muted); font-weight:650; font-size:13px; line-height:1.45}
+    .hint{color:var(--muted); font-weight:450; font-size:13px; line-height:1.5}
+
     .chips{display:flex; gap:8px; flex-wrap:wrap}
     .chip{
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(13,20,33,.10);
+      border:1px solid rgba(16,24,40,.10);
       background:#fff;
-      font-weight:900;
+      font-weight:520;
       cursor:pointer;
       font-size:13px;
     }
@@ -276,92 +282,133 @@
       background:rgba(255,122,0,.08);
     }
 
-    .uplist{display:grid; gap:10px; margin-top:6px}
-    .filebox{
-      border:1px dashed rgba(13,20,33,.20);
-      border-radius:18px;
-      background:rgba(255,255,255,.92);
-      padding:12px;
+    /* Mobile App-like tabbar */
+    .tabbar{
+      position:fixed; left:0; right:0; bottom:0;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:saturate(180%) blur(14px);
+      border-top:1px solid rgba(16,24,40,.08);
+      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+      z-index:80;
+      display:none;
     }
-    .previews{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .preview{
-      width:92px; height:92px;
-      border-radius:16px;
-      border:1px solid rgba(13,20,33,.10);
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      max-width:700px;
+      margin:0 auto;
+    }
+    .tab{
+      border:1px solid rgba(16,24,40,.10);
       background:#fff;
+      border-radius:16px;
+      padding:10px 10px;
+      cursor:pointer;
+      display:grid;
+      gap:2px;
+      text-align:center;
+      font-weight:520;
+      color:#24304a;
       box-shadow:0 10px 18px rgba(16,24,40,.06);
-      overflow:hidden;
-      display:grid; place-items:center;
-      font-weight:900; color:#334155;
+      user-select:none;
     }
-    .preview img{width:100%; height:100%; object-fit:cover}
+    .tab b{font-weight:600; font-size:12px}
+    .tab small{font-weight:450; color:var(--muted); font-size:11px}
+    .tab.active{
+      border-color:rgba(30,99,255,.28);
+      background:linear-gradient(180deg, rgba(30,99,255,.08), rgba(255,255,255,.92));
+    }
 
-    /* Modal + Toast */
+    /* Toast */
     .toast{
-      position:fixed; right:16px; top:70px; z-index:120;
+      position:fixed; right:16px; top:72px; z-index:120;
       display:grid; gap:10px;
     }
     .toast .t{
       width:min(360px, calc(100vw - 32px));
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(13,20,33,.10);
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(16,24,40,.10);
       box-shadow:0 20px 50px rgba(16,24,40,.18);
       border-radius:18px;
       padding:12px;
-      font-weight:900;
+      font-weight:600;
       color:#23304a;
     }
-    .t small{display:block; margin-top:4px; color:var(--muted); font-weight:650}
+    .t small{display:block; margin-top:4px; color:var(--muted); font-weight:450}
 
+    /* Modal */
     .backdrop{
       position:fixed; inset:0;
-      background:rgba(15,23,42,.46);
+      background:rgba(15,23,42,.40);
       backdrop-filter: blur(10px);
       display:none;
-      z-index:100;
+      z-index:110;
       align-items:center; justify-content:center;
       padding:16px;
     }
     .modal{
       width:min(760px, 100%);
       border-radius:24px;
-      background:rgba(255,255,255,.96);
-      border:1px solid rgba(13,20,33,.10);
-      box-shadow:0 40px 120px rgba(0,0,0,.25);
+      background:rgba(255,255,255,.98);
+      border:1px solid rgba(16,24,40,.10);
+      box-shadow:0 40px 120px rgba(0,0,0,.22);
       overflow:hidden;
     }
-    .modalHead{
+    .mHead{
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 16px;
-      border-bottom:1px solid rgba(13,20,33,.08);
+      border-bottom:1px solid rgba(16,24,40,.08);
     }
-    .modalHead b{font-size:15px}
+    .mHead b{font-weight:650}
     .x{
       width:40px; height:40px;
       border-radius:14px;
-      border:1px solid rgba(13,20,33,.14);
+      border:1px solid rgba(16,24,40,.14);
       background:#fff;
       cursor:pointer;
-      font-weight:900;
+      font-weight:650;
       color:#1c2740;
     }
-    .modalBody{padding:16px}
+    .mBody{padding:16px}
 
-    /* Mobile */
+    footer{
+      border-top:1px solid rgba(16,24,40,.08);
+      background:rgba(255,255,255,.75);
+      padding:22px 0 40px;
+    }
+    .footGrid{display:grid; grid-template-columns:1.2fr .8fr; gap:12px}
+    .links{display:grid; grid-template-columns:repeat(2,1fr); gap:8px}
+    .links a{
+      padding:10px 12px; border-radius:12px;
+      border:1px solid rgba(16,24,40,.08);
+      background:#fff;
+      font-weight:520;
+      color:#22304a;
+    }
+    .tiny{
+      font-size:12px;
+      color:rgba(102,112,133,.85);
+      font-weight:450;
+      margin-top:8px;
+    }
+
+    /* Responsive rules */
     @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr}
+      .gridHero{grid-template-columns:1fr}
       .footGrid{grid-template-columns:1fr}
     }
     @media (max-width: 860px){
       .nav{display:none}
+      .chipUser{display:none}
       .hamb{display:block}
-      .pill{display:none}
+      .tabbar{display:block}
     }
     @media (max-width: 720px){
       .grid3{grid-template-columns:1fr}
       .grid2{grid-template-columns:1fr}
       .row2{grid-template-columns:1fr}
-      .btn{padding:11px 12px}
+      main{padding:14px 0 80px}
     }
   </style>
 </head>
@@ -374,36 +421,33 @@
       <div class="toprow">
         <div class="brand" onclick="go('#/')" style="cursor:pointer">
           <div class="logo">B</div>
-          <div class="brandText">
+          <div class="btxt">
             <b>BerberimGelsin</b>
-            <small id="subtitle">Canlı Demo • GitHub Pages</small>
+            <small id="subtitle">Kişisel bakım, kapında.</small>
           </div>
         </div>
 
         <nav class="nav">
-          <a href="#/" >Ana Sayfa</a>
+          <a href="#/">Keşfet</a>
           <a href="#/musteri">Müşteri</a>
-          <a href="#/berber">Berber/Kuaför</a>
-          <a href="#/admin">Admin</a>
+          <a href="#/profesyonel">Profesyonel</a>
+          <a href="#/ayarlar">Ayarlar</a>
         </nav>
 
         <div class="actions">
-          <div class="pill" id="userPill">👤 <span id="pillText">Ziyaretçi</span></div>
+          <div class="chipUser" id="userChip">👤 <span id="userText">Ziyaretçi</span></div>
           <button class="btn ghost small" id="btnLogin">Giriş</button>
           <button class="btn orange small" id="btnRegister">Kayıt</button>
-
-          <div class="hamb">
-            <button id="menuBtn" aria-label="Menü">≡</button>
-          </div>
+          <div class="hamb"><button id="menuBtn">≡</button></div>
         </div>
       </div>
 
       <div id="mobileMenu" style="display:none; padding-bottom:12px">
         <div class="grid2">
-          <button class="btn ghost" onclick="go('#/')">Ana Sayfa</button>
+          <button class="btn ghost" onclick="go('#/')">Keşfet</button>
           <button class="btn ghost" onclick="go('#/musteri')">Müşteri</button>
-          <button class="btn ghost" onclick="go('#/berber')">Berber/Kuaför</button>
-          <button class="btn ghost" onclick="go('#/admin')">Admin</button>
+          <button class="btn ghost" onclick="go('#/profesyonel')">Profesyonel</button>
+          <button class="btn ghost" onclick="go('#/ayarlar')">Ayarlar</button>
         </div>
       </div>
     </div>
@@ -412,120 +456,101 @@
   <main>
     <div class="wrap">
 
-      <!-- VIEW: HOME -->
-      <section class="view" id="view-home">
-        <div class="heroGrid">
+      <!-- VIEW: HOME / DISCOVER -->
+      <section class="view" id="v-home">
+        <div class="gridHero">
           <div class="card">
             <div class="pad">
               <div class="badges">
-                <span class="badge"><span class="dot orange"></span> 3 adımda randevu</span>
-                <span class="badge"><span class="dot green"></span> Onaylı profesyoneller</span>
+                <span class="badge"><span class="dot orange"></span> Hızlı teklif</span>
                 <span class="badge"><span class="dot blue"></span> Konum bazlı</span>
+                <span class="badge"><span class="dot green"></span> Puanlı profesyoneller</span>
               </div>
 
-              <h1>Kişisel Bakım İçin<br><span class="accent">Sıra Bekleme.</span></h1>
+              <h1>Kişisel Bakım<br><span class="accent">Sıra Beklemeden.</span></h1>
               <p class="sub">
                 Berber & kuaför hizmetini evine, ofisine ya da oteline çağır.
-                <b>Müşteri ilan açar</b>, profesyoneller <b>teklif verir</b> — sen seçersin.
+                İlan aç, teklifleri gör, en uygunu seç.
               </p>
 
               <div class="ctaRow">
-                <button class="btn orange" onclick="go('#/musteri')">Müşteri Olarak Başla</button>
-                <button class="btn primary" onclick="go('#/berber')">Berber/Kuaför Olarak Başla</button>
-                <button class="btn ghost" onclick="go('#/admin')">Admin Ayarları</button>
+                <button class="btn orange" onclick="go('#/musteri')">İlan Oluştur</button>
+                <button class="btn primary" onclick="go('#/profesyonel')">Teklif Ver</button>
+                <button class="btn ghost" onclick="openHow()">Nasıl Çalışır?</button>
               </div>
 
-              <div class="miniRow">
-                <span class="miniTag" onclick="openLegal('kvkk')">🔒 KVKK</span>
-                <span class="miniTag" onclick="openLegal('gizlilik')">🛡️ Gizlilik</span>
-                <span class="miniTag" onclick="openHowToTest()">🧪 Demo Nasıl Test Edilir?</span>
-              </div>
+              <div style="height:14px"></div>
 
-              <p class="hint" id="demoNote" style="margin-top:12px">
-                Not: Bu sayfa inceleme amaçlı “Canlı Demo”dur. Demo/Canlı modunu Admin ekranından açıp kapatabilirsin.
-              </p>
+              <div class="grid3">
+                <div class="tile">
+                  <div class="tileHead"><div class="icon">1</div><h4>İlan Aç</h4></div>
+                  <p>Konum, hizmet ve saati yaz. Kısa not ekle.</p>
+                </div>
+                <div class="tile">
+                  <div class="tileHead"><div class="icon orange">2</div><h4>Teklif Al</h4></div>
+                  <p>Yakın profesyoneller fiyat ve süre gönderir.</p>
+                </div>
+                <div class="tile">
+                  <div class="tileHead"><div class="icon">3</div><h4>Seç & Tamamla</h4></div>
+                  <p>Seçtiğin kişi gelir, hizmet tamamlanır.</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="card">
             <div class="pad">
-              <div class="statusRow">
-                <h2 style="margin:0">Sistem Durumu</h2>
-                <span class="live" id="liveBadge"><span class="dot green"></span> Çalışıyor</span>
-              </div>
+              <h2>Yakındaki Hizmetler</h2>
+              <div class="muted">Popüler kategoriler (UI simülasyonu)</div>
 
-              <div class="kv">
-                <div class="item">
-                  <b>Mod</b>
-                  <span id="modeText">Demo Mod</span>
-                </div>
-
-                <div class="item">
-                  <b>Telefon Onayı</b>
-                  <span id="otpText">Demo OTP: 123456 (Açık)</span>
-                </div>
-
-                <div class="item">
-                  <b>Kimlik/Belge Sistemi</b>
-                  <span id="kycText">Açık (Admin’den kapatılabilir)</span>
-                </div>
-
-                <div class="item">
-                  <b>Paylaşılabilir Link</b>
-                  <span class="hint" style="display:block; margin-top:6px" id="shareUrl"></span>
-                  <div style="margin-top:10px">
-                    <button class="btn primary small" onclick="copyShare()">Linki Kopyala</button>
-                  </div>
-                </div>
-
-                <div class="item">
-                  <b>Hızlı Geçiş</b>
+              <div style="height:10px"></div>
+              <div class="grid2">
+                <div class="tile">
+                  <div class="tileHead"><div class="icon">✂️</div><h4>Saç + Sakal</h4></div>
+                  <p>En hızlı teklif alan kategori.</p>
                   <div class="ctaRow" style="margin-top:10px">
-                    <button class="btn ghost small" onclick="go('#/musteri')">Müşteri Paneli</button>
-                    <button class="btn ghost small" onclick="go('#/berber')">Berber/Kuaför Paneli</button>
+                    <button class="btn ghost small" onclick="toast('Kategori', 'Saç + Sakal seçildi')">Seç</button>
+                    <button class="btn primary small" onclick="go('#/musteri')">İlan Aç</button>
+                  </div>
+                </div>
+                <div class="tile">
+                  <div class="tileHead"><div class="icon orange">💇‍♀️</div><h4>Kuaför / Fön</h4></div>
+                  <p>Kuaförler için yetenek & ürün gösterimi.</p>
+                  <div class="ctaRow" style="margin-top:10px">
+                    <button class="btn ghost small" onclick="toast('Kategori', 'Kuaför seçildi')">Seç</button>
+                    <button class="btn primary small" onclick="go('#/profesyonel')">Profil</button>
                   </div>
                 </div>
               </div>
 
-              <p class="hint" style="margin-top:10px">Kısayol: <b>Ctrl + Shift + D</b> → Demo ayar paneli</p>
+              <div style="height:12px"></div>
+              <div class="tile">
+                <h4 style="margin:0 0 6px">Paylaşılabilir Link</h4>
+                <div class="muted" id="shareUrl"></div>
+                <div class="ctaRow" style="margin-top:10px">
+                  <button class="btn ghost small" onclick="copyShare()">Kopyala</button>
+                  <button class="btn orange small" onclick="toast('İpucu','Instagram bio için uygundur')">Instagram</button>
+                </div>
+              </div>
+
             </div>
-          </div>
-        </div>
-
-        <div style="height:14px"></div>
-
-        <div class="grid3">
-          <div class="tile orange">
-            <div class="icon">1</div>
-            <h4>Müşteri İlan Açar</h4>
-            <p>Konum, hizmet, saat aralığı ve not girer.</p>
-          </div>
-          <div class="tile">
-            <div class="icon">2</div>
-            <h4>Teklifler Gelir</h4>
-            <p>Berber/kuaför fiyat + süre + ulaşım seçer.</p>
-          </div>
-          <div class="tile">
-            <div class="icon">3</div>
-            <h4>Seç & Puanla</h4>
-            <p>Hizmet bittiğinde “makas puanı” ver.</p>
           </div>
         </div>
       </section>
 
       <!-- VIEW: CUSTOMER -->
-      <section class="view" id="view-customer">
+      <section class="view" id="v-customer">
         <div class="card">
           <div class="pad">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
               <div>
-                <h2 style="margin:0">Müşteri Paneli</h2>
-                <div class="muted">İlan oluştur, teklifleri gör, randevunu yönet.</div>
+                <h2 style="margin:0">Müşteri</h2>
+                <div class="muted">İlan oluştur • teklifleri gör • seç</div>
               </div>
               <div class="ctaRow" style="margin:0">
-                <button class="btn ghost" onclick="go('#/')">Ana Sayfa</button>
-                <button class="btn orange" onclick="openAuth('register','Müşteri')">Kayıt Ol</button>
-                <button class="btn primary" onclick="openAuth('login','Müşteri')">Giriş</button>
+                <button class="btn ghost small" onclick="go('#/')">Geri</button>
+                <button class="btn orange small" onclick="openAuth('register','Müşteri')">Kayıt</button>
+                <button class="btn primary small" onclick="openAuth('login','Müşteri')">Giriş</button>
               </div>
             </div>
 
@@ -533,9 +558,10 @@
 
             <div class="grid2">
               <div class="tile">
-                <h4>Yeni İlan Oluştur</h4>
-                <p class="muted">Bu kısım “Canlı Mod”da backend’e bağlanacak şekilde hazırlandı. Demo modda simüle edilir.</p>
-                <div class="formGrid" style="margin-top:10px">
+                <h4 style="margin:0 0 6px">İlan Oluştur</h4>
+                <div class="muted">Bu ekran gerçek ürün akışını gösterir. İşlemler UI içinde simüle edilir.</div>
+
+                <div class="form" style="margin-top:10px">
                   <div class="row2">
                     <div>
                       <label>Konum</label>
@@ -547,40 +573,36 @@
                         <option>Saç + Sakal</option>
                         <option>Saç</option>
                         <option>Sakal</option>
+                        <option>Kuaför / Fön</option>
                         <option>Bakım</option>
-                        <option>Fön / Kadın Kuaför</option>
                       </select>
                     </div>
                   </div>
+
                   <div class="row2">
                     <div>
                       <label>Tarih/Saat</label>
-                      <input id="c_time" placeholder="Örn: Bugün 18:00"/>
+                      <input id="c_time" placeholder="Örn: Bugün 18:30"/>
                     </div>
                     <div>
-                      <label>Aciliyet</label>
-                      <select id="c_urg">
-                        <option>Normal</option>
-                        <option>Acil</option>
-                      </select>
+                      <label>Not</label>
+                      <input id="c_note" placeholder="Örn: Oteldeyim, sessiz hizmet."/>
                     </div>
                   </div>
-                  <div>
-                    <label>Not</label>
-                    <textarea id="c_note" rows="3" placeholder="Örn: Oteldeyim, oda numarası sonra paylaşılır."></textarea>
-                    <div class="hint">Telefon/WhatsApp gibi bilgi paylaşımı gerçek sistemde engellenecek.</div>
-                  </div>
-                  <button class="btn orange" onclick="createListing()">İlanı Yayınla</button>
+
+                  <button class="btn orange" onclick="createListing()">İlanı Gönder</button>
                 </div>
               </div>
 
-              <div class="tile orange">
-                <h4>Teklifler (Demo)</h4>
-                <p class="muted">Demo modda otomatik örnek teklifler gösterir.</p>
-                <div id="offers" class="uplist"></div>
+              <div class="tile">
+                <h4 style="margin:0 0 6px">Gelen Teklifler</h4>
+                <div class="muted">Teklifler otomatik listelenir (UI simülasyonu).</div>
+
+                <div id="offers" class="form" style="margin-top:10px"></div>
+
                 <div class="ctaRow" style="margin-top:10px">
-                  <button class="btn ghost" onclick="seedOffers()">Örnek Teklif Getir</button>
-                  <button class="btn primary" onclick="toast('Canlı Mod', 'Backend bağlanınca gerçek teklifler gelecek')">Canlı Mod Bilgisi</button>
+                  <button class="btn ghost" onclick="seedOffers()">Teklifleri Yenile</button>
+                  <button class="btn primary" onclick="toast('Bilgi','Bir sonraki adımda backend API bağlayacağız')">Backend</button>
                 </div>
               </div>
             </div>
@@ -589,19 +611,19 @@
         </div>
       </section>
 
-      <!-- VIEW: PROVIDER -->
-      <section class="view" id="view-provider">
+      <!-- VIEW: PRO -->
+      <section class="view" id="v-pro">
         <div class="card">
           <div class="pad">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
               <div>
-                <h2 style="margin:0">Berber / Kuaför Paneli</h2>
-                <div class="muted">Profil, yetenekler, ekipman ve belge doğrulama.</div>
+                <h2 style="margin:0">Profesyonel</h2>
+                <div class="muted">Profil • yetenekler • ekipman</div>
               </div>
               <div class="ctaRow" style="margin:0">
-                <button class="btn ghost" onclick="go('#/')">Ana Sayfa</button>
-                <button class="btn orange" onclick="openAuth('register','Berber')">Kayıt Ol</button>
-                <button class="btn primary" onclick="openAuth('login','Berber')">Giriş</button>
+                <button class="btn ghost small" onclick="go('#/')">Geri</button>
+                <button class="btn orange small" onclick="openAuth('register','Profesyonel')">Kayıt</button>
+                <button class="btn primary small" onclick="openAuth('login','Profesyonel')">Giriş</button>
               </div>
             </div>
 
@@ -609,183 +631,111 @@
 
             <div class="grid2">
               <div class="tile">
-                <h4>Yetenekler (Berber/Kuaför)</h4>
-                <p class="muted">Müşteri seni seçerken yeteneklerini görmeli.</p>
+                <h4 style="margin:0 0 6px">Yetenekler</h4>
+                <div class="muted">Müşteriler seçim yaparken bunu görür.</div>
 
-                <div class="formGrid" style="margin-top:10px">
+                <div style="height:10px"></div>
+                <div class="chips" id="skillChips"></div>
+
+                <div style="height:10px"></div>
+                <div class="row2">
                   <div>
-                    <label>Uzmanlık Alanları</label>
-                    <div class="chips" id="skillChips"></div>
-                    <div class="hint">Seçtiklerin profilinde görünür.</div>
+                    <label>Deneyim (yıl)</label>
+                    <input id="p_exp" placeholder="Örn: 7"/>
                   </div>
-
-                  <div class="row2">
-                    <div>
-                      <label>Deneyim (yıl)</label>
-                      <input id="p_exp" inputmode="numeric" placeholder="Örn: 7"/>
-                    </div>
-                    <div>
-                      <label>Hizmet Bölgesi</label>
-                      <input id="p_area" placeholder="Örn: Alanya / Mahmutlar / Kestel"/>
-                    </div>
+                  <div>
+                    <label>Hizmet Bölgesi</label>
+                    <input id="p_area" placeholder="Örn: Alanya / Mahmutlar"/>
                   </div>
-
-                  <button class="btn primary" onclick="saveProviderProfile()">Profilimi Kaydet</button>
-                </div>
-              </div>
-
-              <div class="tile orange">
-                <h4>Ekipman & Malzeme Fotoğrafları</h4>
-                <p class="muted">Makas seti, fön makinesi, ürünler… (Demo: tarayıcıda saklanır)</p>
-
-                <div class="filebox">
-                  <label>Fotoğraf Yükle</label>
-                  <input id="equipFiles" type="file" accept="image/*" multiple />
-                  <div class="hint">Öneri: 1MB altında yükle. (Instagram testinde hızlı açılır.)</div>
-                  <div class="previews" id="equipPrev"></div>
                 </div>
 
                 <div style="height:10px"></div>
+                <button class="btn primary" onclick="savePro()">Profili Kaydet</button>
+              </div>
 
-                <h4>Kimlik / Belge (Admin Aç-Kapat)</h4>
-                <p class="muted">Kimlik, ustalık belgesi, sertifika…</p>
+              <div class="tile">
+                <h4 style="margin:0 0 6px">Ekipman Fotoğrafları</h4>
+                <div class="muted">Ürünler/aletler müşteriye güven verir. (Tarayıcıda tutulur)</div>
 
-                <div class="filebox" id="kycBox">
-                  <label>Belge Yükle</label>
-                  <input id="docFiles" type="file" accept="image/*,application/pdf" multiple />
-                  <div class="hint">Demo modda dosyalar sadece bu tarayıcıda görünür.</div>
-                  <div class="previews" id="docPrev"></div>
+                <div style="height:10px"></div>
+                <label>Fotoğraf Yükle</label>
+                <input id="equipFiles" type="file" accept="image/*" multiple />
+                <div class="hint">Öneri: 1MB altında. Mobilde hızlı açılır.</div>
+
+                <div id="equipPrev" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px"></div>
+
+                <div style="height:12px"></div>
+                <div class="tile" style="box-shadow:none; border-radius:16px; background:rgba(30,99,255,.05); border-color:rgba(30,99,255,.12)">
+                  <h4 style="margin:0 0 6px">Teklif Ver (Simülasyon)</h4>
+                  <div class="row2">
+                    <div><label>Fiyat</label><input id="bid_price" placeholder="Örn: 450 ₺"/></div>
+                    <div><label>Ulaşım</label><input id="bid_eta" placeholder="Örn: 30 dk"/></div>
+                  </div>
+                  <div style="height:10px"></div>
+                  <button class="btn orange" onclick="toast('Teklif','Teklif gönderildi (UI)')">Teklif Gönder</button>
                 </div>
 
               </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="tile">
-              <h4>Teklif Ver (Demo)</h4>
-              <p class="muted">Canlı modda müşteri ilanlarına gerçek teklif göndereceğiz.</p>
-              <div class="row2">
-                <div>
-                  <label>Fiyat</label>
-                  <input id="bid_price" placeholder="Örn: 450 ₺"/>
-                </div>
-                <div>
-                  <label>Ne kadar sürede gelirsin?</label>
-                  <input id="bid_eta" placeholder="Örn: 30 dk"/>
-                </div>
-              </div>
-              <div style="height:10px"></div>
-              <button class="btn orange" onclick="sendBid()">Teklif Ver</button>
             </div>
 
           </div>
         </div>
       </section>
 
-      <!-- VIEW: ADMIN -->
-      <section class="view" id="view-admin">
+      <!-- VIEW: SETTINGS -->
+      <section class="view" id="v-settings">
         <div class="card">
           <div class="pad">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
-              <div>
-                <h2 style="margin:0">Admin Ayarları (Canlı Demo)</h2>
-                <div class="muted">Demo/Canlı mod, OTP, Kimlik/Belge, özellik aç-kapat.</div>
-              </div>
-              <div class="ctaRow" style="margin:0">
-                <button class="btn ghost" onclick="go('#/')">Ana Sayfa</button>
-                <button class="btn primary" onclick="resetAll()">Sıfırla</button>
-              </div>
-            </div>
+            <h2>Ayarlar</h2>
+            <div class="muted">Bu alan görünürde “demo” yazmaz. Sadece sistemin nasıl davranacağını ayarlar.</div>
 
             <div style="height:12px"></div>
-
             <div class="grid2">
               <div class="tile">
-                <h4>Mod Yönetimi</h4>
-                <div class="formGrid" style="margin-top:10px">
-                  <div class="row2">
-                    <div>
-                      <label>Çalışma Modu</label>
-                      <select id="cfg_mode">
-                        <option value="demo">Demo</option>
-                        <option value="live">Canlı</option>
-                      </select>
-                      <div class="hint">Canlı modda backend entegrasyonları devreye girer (bir sonraki adım).</div>
-                    </div>
-                    <div>
-                      <label>Canlı API Base URL (opsiyonel)</label>
-                      <input id="cfg_api" placeholder="Örn: https://api.berberimgelsin.com"/>
-                      <div class="hint">Şimdilik boş bırak. Backend’i kurunca buraya yazacağız.</div>
-                    </div>
-                  </div>
-
-                  <button class="btn primary" onclick="saveConfig()">Ayarları Kaydet</button>
-                </div>
+                <h4 style="margin:0 0 6px">Telefon Doğrulama (OTP)</h4>
+                <div class="muted">Şimdilik UI simülasyonu. Kod: <b>123456</b></div>
+                <div style="height:10px"></div>
+                <select id="cfg_otp">
+                  <option value="on">Açık</option>
+                  <option value="off">Kapalı</option>
+                </select>
+                <div style="height:10px"></div>
+                <button class="btn primary" onclick="saveCfg()">Kaydet</button>
               </div>
 
-              <div class="tile orange">
-                <h4>Güvenlik Toggle’ları</h4>
-                <div class="formGrid" style="margin-top:10px">
-                  <div class="row2">
-                    <div>
-                      <label>Telefon (OTP)</label>
-                      <select id="cfg_otp">
-                        <option value="on">Açık</option>
-                        <option value="off">Kapalı</option>
-                      </select>
-                      <div class="hint">Demo OTP: 123456. Canlıda SMS servisleri backend’de olacak.</div>
-                    </div>
-                    <div>
-                      <label>Kimlik/Belge Sistemi</label>
-                      <select id="cfg_kyc">
-                        <option value="on">Açık</option>
-                        <option value="off">Kapalı</option>
-                      </select>
-                      <div class="hint">Kapalı olunca belge yükleme kutusu gizlenir.</div>
-                    </div>
+              <div class="tile">
+                <h4 style="margin:0 0 6px">Paylaşım Linki</h4>
+                <div class="muted">Instagram bio için uygundur. Hash routing çalışır.</div>
+                <div style="height:10px"></div>
+                <div class="tile" style="box-shadow:none; border-radius:16px; border-color:rgba(16,24,40,.10)">
+                  <div id="shareUrl2" class="muted"></div>
+                  <div class="ctaRow" style="margin-top:10px">
+                    <button class="btn ghost small" onclick="copyShare()">Kopyala</button>
+                    <button class="btn orange small" onclick="toast('Paylaşım','Link hazır')">Hazır</button>
                   </div>
-
-                  <div class="row2">
-                    <div>
-                      <label>Ekipman Foto Yükleme</label>
-                      <select id="cfg_equip">
-                        <option value="on">Açık</option>
-                        <option value="off">Kapalı</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label>Demo Uyarı Metinleri</label>
-                      <select id="cfg_notes">
-                        <option value="on">Göster</option>
-                        <option value="off">Gizle</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <button class="btn orange" onclick="saveConfig()">Kaydet</button>
                 </div>
               </div>
             </div>
 
-            <div style="height:12px"></div>
-
-            <div class="tile">
-              <h4>Config JSON (kopyala / paylaş)</h4>
-              <p class="muted">Bu config’i istersek sonra <b>config.json</b> dosyası yapıp herkese global uygulayacağız. Şimdilik tarayıcıda saklı.</p>
-              <textarea id="cfg_out" rows="8" style="margin-top:10px"></textarea>
-              <div class="ctaRow" style="margin-top:10px">
-                <button class="btn ghost" onclick="copyCfg()">Config’i Kopyala</button>
-                <button class="btn primary" onclick="toast('İpucu', 'Bir sonraki adımda bunu repo içinde config.json yapacağız')">Sonraki Adım</button>
-              </div>
+            <div class="tiny">
+              Not: Bu sayfa statik bir UI önizlemesidir. Telefon SMS ve admin panel entegrasyonları backend ile yapılır.
+              (Bu metin sadece footer seviyesinde kalır.)
             </div>
-
           </div>
         </div>
       </section>
 
     </div>
   </main>
+
+  <div class="tabbar" aria-label="Alt menü">
+    <div class="tabs">
+      <div class="tab" id="t1" onclick="go('#/')"><b>Keşfet</b><small>Ana</small></div>
+      <div class="tab" id="t2" onclick="go('#/musteri')"><b>Müşteri</b><small>İlan</small></div>
+      <div class="tab" id="t3" onclick="go('#/profesyonel')"><b>Pro</b><small>Profil</small></div>
+      <div class="tab" id="t4" onclick="go('#/ayarlar')"><b>Ayarlar</b><small>Sistem</small></div>
+    </div>
+  </div>
 
   <footer>
     <div class="wrap">
@@ -794,18 +744,18 @@
           <div style="display:flex; align-items:center; gap:10px">
             <div class="logo" style="width:34px;height:34px;border-radius:14px">B</div>
             <div>
-              <b>BerberimGelsin</b>
-              <div class="muted">Yeni nesil kişisel bakım pazaryeri • Canlı Demo</div>
+              <b style="font-weight:650">BerberimGelsin</b>
+              <div class="muted">Modern kişisel bakım pazaryeri</div>
             </div>
           </div>
-          <div class="muted" style="margin-top:8px">© <span id="year"></span></div>
+          <div class="tiny">© <span id="year"></span></div>
         </div>
 
-        <div class="footLinks">
+        <div class="links">
           <a href="#" onclick="openLegal('kvkk');return false;">KVKK</a>
           <a href="#" onclick="openLegal('gizlilik');return false;">Gizlilik</a>
           <a href="#" onclick="openLegal('cerez');return false;">Çerez</a>
-          <a href="#" onclick="openLegal('sartlar');return false;">Hizmet Şartları</a>
+          <a href="#" onclick="openLegal('sartlar');return false;">Şartlar</a>
         </div>
       </div>
     </div>
@@ -814,23 +764,23 @@
   <!-- Modal -->
   <div class="backdrop" id="backdrop">
     <div class="modal">
-      <div class="modalHead">
-        <b id="modalTitle">Modal</b>
+      <div class="mHead">
+        <b id="mTitle">Bilgi</b>
         <button class="x" onclick="closeModal()">✕</button>
       </div>
-      <div class="modalBody" id="modalBody"></div>
+      <div class="mBody" id="mBody"></div>
     </div>
   </div>
 
 <script>
-  // --- Helpers
   const $ = (q, el=document)=> el.querySelector(q);
   const $$ = (q, el=document)=> [...el.querySelectorAll(q)];
   const store = {
-    get(k, d=null){ try{ return JSON.parse(localStorage.getItem(k)) ?? d }catch(e){ return d } },
-    set(k, v){ localStorage.setItem(k, JSON.stringify(v)) },
+    get(k,d=null){ try{ return JSON.parse(localStorage.getItem(k)) ?? d }catch(e){ return d } },
+    set(k,v){ localStorage.setItem(k, JSON.stringify(v)) },
     del(k){ localStorage.removeItem(k) }
   };
+
   function toast(title, desc=""){
     const wrap = $("#toast");
     const el = document.createElement("div");
@@ -840,438 +790,274 @@
     setTimeout(()=>{ el.style.opacity="0"; el.style.transform="translateY(-4px)"; el.style.transition=".2s"; }, 2300);
     setTimeout(()=> el.remove(), 2700);
   }
+
   function go(hash){ location.hash = hash; $("#mobileMenu").style.display="none"; }
+
   function copy(text){
-    navigator.clipboard.writeText(text).then(()=>toast("Kopyalandı")).catch(()=>toast("Kopyalanamadı","Tarayıcı izin vermedi"));
+    navigator.clipboard.writeText(text)
+      .then(()=>toast("Kopyalandı"))
+      .catch(()=>toast("Kopyalanamadı","Tarayıcı izin vermedi"));
   }
 
-  // --- Global config (demo/live toggles)
-  const DEFAULT_CFG = {
-    mode: "demo",          // demo | live
-    apiBase: "",           // live api base url
-    otpEnabled: true,
-    kycEnabled: true,
-    equipEnabled: true,
-    showNotes: true,
-    demoOtp: "123456"
-  };
-  let CFG = store.get("bg_cfg", DEFAULT_CFG);
+  /* Minimal settings (keeps UI clean) */
+  let CFG = store.get("bg_cfg2", { otp: "on" });
+  let USER = store.get("bg_user2", null);
 
-  // --- Session
-  let USER = store.get("bg_user", null); // {role, first,last, phone}
-
-  // --- Router
   const routes = {
-    "": "view-home",
-    "#/": "view-home",
-    "#/musteri": "view-customer",
-    "#/berber": "view-provider",
-    "#/admin": "view-admin"
+    "": "v-home",
+    "#/": "v-home",
+    "#/musteri": "v-customer",
+    "#/profesyonel": "v-pro",
+    "#/ayarlar": "v-settings"
   };
+
   function renderRoute(){
     const hash = location.hash || "#/";
-    const id = routes[hash] || "view-home";
+    const id = routes[hash] || "v-home";
     $$(".view").forEach(v=> v.classList.remove("active"));
     $("#"+id).classList.add("active");
-    updateUI();
+    setActiveTab(hash);
+    updateShare();
+    updateUserUI();
   }
 
-  // --- UI Updaters
-  function updateUserPill(){
+  function setActiveTab(hash){
+    const map = {"#/":"t1","#/musteri":"t2","#/profesyonel":"t3","#/ayarlar":"t4"};
+    ["t1","t2","t3","t4"].forEach(id=> $("#"+id)?.classList.remove("active"));
+    const t = map[hash] || "t1";
+    $("#"+t)?.classList.add("active");
+  }
+
+  function updateShare(){
+    const url = location.origin + location.pathname + "#/";
+    $("#shareUrl").textContent = url;
+    $("#shareUrl2").textContent = url;
+  }
+  function copyShare(){ copy(location.origin + location.pathname + "#/"); }
+
+  function updateUserUI(){
     if(USER){
-      $("#pillText").textContent = `${USER.role} • ${USER.first} ${USER.last}`.trim();
+      $("#userText").textContent = `${USER.role} • ${USER.first} ${USER.last}`;
       $("#btnLogin").textContent = "Çıkış";
       $("#btnRegister").style.display = "none";
     }else{
-      $("#pillText").textContent = "Ziyaretçi";
+      $("#userText").textContent = "Ziyaretçi";
       $("#btnLogin").textContent = "Giriş";
       $("#btnRegister").style.display = "";
     }
+    $("#cfg_otp").value = CFG.otp || "on";
   }
 
-  function updateConfigUI(){
-    $("#modeText").textContent = (CFG.mode==="live") ? "Canlı Mod" : "Demo Mod";
-    $("#otpText").textContent = CFG.otpEnabled ? `Demo OTP: ${CFG.demoOtp} (Açık)` : "Kapalı";
-    $("#kycText").textContent = CFG.kycEnabled ? "Açık (Admin’den kapatılabilir)" : "Kapalı";
-    $("#subtitle").textContent = (CFG.mode==="live") ? "Canlı Mod • GitHub + API" : "Canlı Demo • GitHub Pages";
-
-    // show/hide notes
-    $("#demoNote").style.display = CFG.showNotes ? "" : "none";
-
-    // provider toggles
-    $("#kycBox").style.display = CFG.kycEnabled ? "" : "none";
-    $("#equipFiles").closest(".filebox").style.display = CFG.equipEnabled ? "" : "none";
-
-    // share url
-    $("#shareUrl").textContent = location.origin + location.pathname + "#/";
-    $("#liveBadge").innerHTML = `<span class="dot green"></span> Çalışıyor`;
-
-    // Admin form fill
-    if($("#cfg_mode")){
-      $("#cfg_mode").value = CFG.mode;
-      $("#cfg_api").value = CFG.apiBase || "";
-      $("#cfg_otp").value = CFG.otpEnabled ? "on" : "off";
-      $("#cfg_kyc").value = CFG.kycEnabled ? "on" : "off";
-      $("#cfg_equip").value = CFG.equipEnabled ? "on" : "off";
-      $("#cfg_notes").value = CFG.showNotes ? "on" : "off";
-      $("#cfg_out").value = JSON.stringify(CFG, null, 2);
-    }
-  }
-
-  function updateUI(){
-    updateUserPill();
-    updateConfigUI();
-    buildSkillChips();
-  }
-
-  // --- Mobile menu
+  /* Mobile menu */
   $("#menuBtn").addEventListener("click", ()=>{
     const m = $("#mobileMenu");
     m.style.display = (m.style.display==="none" || !m.style.display) ? "block" : "none";
   });
 
-  // --- Legal texts
-  const LEGAL = {
-    kvkk: { title:"KVKK (Demo)", body:"Kişisel veriler; hizmet sunumu, güvenlik ve yasal yükümlülükler amacıyla işlenir. (Demo metin)" },
-    gizlilik:{ title:"Gizlilik (Demo)", body:"Veri güvenliği, erişim kontrolü ve kayıt politikaları üretimde admin panelden yönetilir. (Demo)" },
-    cerez:{ title:"Çerez (Demo)", body:"Bu demo localStorage kullanır. Üretimde çerez yönetimi modülü olacaktır." },
-    sartlar:{ title:"Hizmet Şartları (Demo)", body:"Komisyon/üyelik/iptal şartları sözleşme ile belirlenir. (Demo)" }
-  };
-
+  /* How it works */
   function openModal(title, html){
-    $("#modalTitle").textContent = title;
-    $("#modalBody").innerHTML = html;
+    $("#mTitle").textContent = title;
+    $("#mBody").innerHTML = html;
     $("#backdrop").style.display = "flex";
   }
   function closeModal(){ $("#backdrop").style.display="none"; }
   $("#backdrop").addEventListener("click", (e)=>{ if(e.target.id==="backdrop") closeModal(); });
 
-  function openLegal(key){
-    const l = LEGAL[key] || LEGAL.kvkk;
-    openModal(l.title, `<p class="hint">${l.body}</p><div style="margin-top:12px"><button class="btn ghost" onclick="closeModal()">Kapat</button></div>`);
-  }
-
-  function openHowToTest(){
-    openModal("Demo Nasıl Test Edilir?", `
-      <div class="hint">
-        1) Müşteri veya Berber paneline gir.<br/>
-        2) Kayıt ol → (OTP açıksa) <b>${CFG.demoOtp}</b> yaz.<br/>
-        3) Admin’den OTP/Kimlik sistemini aç-kapat.<br/>
-        4) Dosya yükleme: ekipman + belge alanlarını test et.<br/>
+  function openHow(){
+    openModal("Nasıl Çalışır?", `
+      <div class="muted">
+        <b>1)</b> Müşteri ilan açar (konum + hizmet + saat).<br/>
+        <b>2)</b> Profesyoneller teklif verir (fiyat + süre).<br/>
+        <b>3)</b> Müşteri seçer, hizmet tamamlanır.
       </div>
-      <div style="margin-top:12px" class="ctaRow">
-        <button class="btn orange" onclick="closeModal(); go('#/musteri')">Müşteri Paneli</button>
-        <button class="btn primary" onclick="closeModal(); go('#/berber')">Berber Paneli</button>
+      <div class="ctaRow" style="margin-top:12px">
+        <button class="btn orange" onclick="closeModal();go('#/musteri')">İlan Aç</button>
+        <button class="btn primary" onclick="closeModal();go('#/profesyonel')">Teklif Ver</button>
       </div>
     `);
   }
 
-  // --- Auth (Demo/Live-ready)
-  const AUTH = { mode:"register", role:"Müşteri", step:0, phone:"", otp:"", first:"", last:"", kvkk:false };
-
-  function openAuth(mode, role){
-    AUTH.mode = mode;
-    AUTH.role = role;
-    AUTH.step = 0;
-    AUTH.phone = ""; AUTH.otp=""; AUTH.first=""; AUTH.last=""; AUTH.kvkk=false;
-    renderAuth();
+  /* Legal */
+  const LEGAL = {
+    kvkk:{t:"KVKK", b:"Kişisel veriler; hizmet sunumu ve güvenlik için işlenir."},
+    gizlilik:{t:"Gizlilik", b:"Veriler erişim kontrolü ile korunur. Güvenlik politikaları uygulanır."},
+    cerez:{t:"Çerez", b:"Bu önizleme, akışı simüle etmek için tarayıcı depolaması kullanır."},
+    sartlar:{t:"Şartlar", b:"Ücretlendirme ve hizmet şartları sözleşme ile belirlenir."}
+  };
+  function openLegal(k){
+    const L = LEGAL[k] || LEGAL.kvkk;
+    openModal(L.t, `<div class="muted">${L.b}</div><div class="ctaRow" style="margin-top:12px"><button class="btn ghost" onclick="closeModal()">Kapat</button></div>`);
   }
 
-  function renderAuth(){
-    const isReg = AUTH.mode==="register";
-    const steps = ["Rol","Telefon","OTP","Profil"];
-    const stepper = `<div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px">
-      ${steps.map((s,i)=>`<span style="padding:7px 10px;border-radius:999px;border:1px solid rgba(13,20,33,.10);background:#fff;font-weight:900;opacity:${i===AUTH.step?1:.55}">${i+1}) ${s}</span>`).join("")}
-    </div>`;
-
-    let body = stepper;
-
-    if(AUTH.step===0){
-      body += `
-        <div class="formGrid">
+  /* Auth (clean: no DEMO words) */
+  function openAuth(mode, role){
+    openModal(mode==="register"?"Kayıt":"Giriş", `
+      <div class="form">
+        <div class="row2">
+          <div><label>Ad</label><input id="a_first" placeholder="Ad"/></div>
+          <div><label>Soyad</label><input id="a_last" placeholder="Soyad"/></div>
+        </div>
+        <div class="row2">
+          <div><label>Telefon</label><input id="a_phone" placeholder="5551234567" inputmode="numeric"/></div>
           <div>
             <label>Rol</label>
-            <div class="chips" style="margin-top:6px">
-              <span class="chip ${AUTH.role==='Müşteri'?'active':''}" onclick="AUTH.role='Müşteri';renderAuth()">Müşteri</span>
-              <span class="chip ${AUTH.role==='Berber'?'active':''}" onclick="AUTH.role='Berber';renderAuth()">Berber/Kuaför</span>
-            </div>
-            <div class="hint" style="margin-top:8px">Müşteri ilan açar • Berber teklif verir ve onay sürecinden geçer.</div>
+            <select id="a_role">
+              <option>${role}</option>
+              <option>${role==="Müşteri"?"Profesyonel":"Müşteri"}</option>
+            </select>
           </div>
-          <div class="ctaRow">
-            <button class="btn ghost" onclick="closeModal()">Vazgeç</button>
-            <button class="btn ${isReg?'orange':'primary'}" onclick="AUTH.step=1;renderAuth()">Devam</button>
-          </div>
-        </div>`;
-    }
+        </div>
 
-    if(AUTH.step===1){
-      body += `
-        <div class="formGrid">
-          <div>
-            <label>Telefon</label>
-            <input id="a_phone" placeholder="Örn: 5551234567" inputmode="numeric" value="${AUTH.phone}"/>
-            <div class="hint">Canlı modda SMS entegrasyonu backend üzerinden yapılacak. Client’a API key koymuyoruz.</div>
-          </div>
-          <div class="ctaRow">
-            <button class="btn ghost" onclick="AUTH.step=0;renderAuth()">Geri</button>
-            <button class="btn ${isReg?'orange':'primary'}" onclick="sendOtp()">${CFG.otpEnabled?'Kod Gönder':'OTP Kapalı → Devam'}</button>
-          </div>
-        </div>`;
-    }
+        <div id="otpWrap" style="display:${CFG.otp==="on"?"block":"none"}">
+          <label>OTP</label>
+          <input id="a_otp" placeholder="123456" inputmode="numeric"/>
+          <div class="hint">OTP açıkken örnek kod: <b>123456</b></div>
+        </div>
 
-    if(AUTH.step===2){
-      body += `
-        <div class="formGrid">
-          <div>
-            <label>OTP</label>
-            <input id="a_otp" placeholder="${CFG.demoOtp}" inputmode="numeric" value="${AUTH.otp}"/>
-            <div class="hint">Demo kod: <b>${CFG.demoOtp}</b></div>
-          </div>
-          <div class="ctaRow">
-            <button class="btn ghost" onclick="AUTH.step=1;renderAuth()">Geri</button>
-            <button class="btn ${isReg?'orange':'primary'}" onclick="verifyOtp()">Doğrula</button>
-          </div>
-        </div>`;
-    }
-
-    if(AUTH.step===3){
-      body += `
-        <div class="formGrid">
-          <div class="row2">
-            <div><label>Ad</label><input id="a_first" placeholder="Ad" value="${AUTH.first}"/></div>
-            <div><label>Soyad</label><input id="a_last" placeholder="Soyad" value="${AUTH.last}"/></div>
-          </div>
-
-          <div style="display:flex; gap:10px; align-items:flex-start">
-            <input type="checkbox" id="a_kvkk" style="width:18px;height:18px;margin-top:3px" ${AUTH.kvkk?"checked":""}/>
-            <div>
-              <div style="font-weight:900">KVKK & Gizlilik onayı</div>
-              <div class="hint">Demo. Üretimde metinler admin panelden yönetilir.</div>
-            </div>
-          </div>
-
-          <div class="ctaRow">
-            <button class="btn ghost" onclick="AUTH.step=${CFG.otpEnabled?2:1};renderAuth()">Geri</button>
-            <button class="btn ${isReg?'orange':'primary'}" onclick="finishAuth()">${isReg?'Kaydı Tamamla':'Giriş Yap'}</button>
-          </div>
-        </div>`;
-    }
-
-    openModal(isReg?"Kayıt (Demo)":"Giriş (Demo)", body);
+        <div class="ctaRow">
+          <button class="btn ghost" onclick="closeModal()">Vazgeç</button>
+          <button class="btn orange" onclick="finishAuth('${mode}')">${mode==="register"?"Hesap Oluştur":"Giriş Yap"}</button>
+        </div>
+      </div>
+    `);
   }
 
-  function sendOtp(){
-    AUTH.phone = ($("#a_phone")?.value || "").trim();
-    if(!AUTH.phone){ toast("Telefon gerekli"); return; }
+  function finishAuth(mode){
+    const first = ($("#a_first").value||"").trim();
+    const last  = ($("#a_last").value||"").trim();
+    const phone = ($("#a_phone").value||"").trim();
+    const role  = $("#a_role").value;
 
-    if(!CFG.otpEnabled){
-      toast("OTP kapalı", "Admin ayarı ile geçildi");
-      AUTH.step=3; renderAuth();
-      return;
+    if(!first || !last){ toast("Bilgi eksik","Ad soyad gerekli"); return; }
+    if(!phone){ toast("Bilgi eksik","Telefon gerekli"); return; }
+
+    if(CFG.otp==="on"){
+      const otp = ($("#a_otp").value||"").trim();
+      if(otp!=="123456"){ toast("OTP hatalı","Kod yanlış"); return; }
     }
 
-    // DEMO: Live mode hook (later)
-    if(CFG.mode==="live" && CFG.apiBase){
-      toast("Canlı OTP", "Backend bağlanınca SMS gönderilecek");
-      AUTH.step=2; renderAuth();
-      return;
-    }
-
-    toast("Kod gönderildi", `Demo OTP: ${CFG.demoOtp}`);
-    AUTH.step=2; renderAuth();
-  }
-
-  function verifyOtp(){
-    AUTH.otp = ($("#a_otp")?.value || "").trim();
-    if(AUTH.otp !== CFG.demoOtp){ toast("Kod hatalı", `Demo: ${CFG.demoOtp}`); return; }
-    toast("Doğrulandı");
-    AUTH.step=3; renderAuth();
-  }
-
-  function finishAuth(){
-    AUTH.first = ($("#a_first")?.value || "").trim();
-    AUTH.last  = ($("#a_last")?.value || "").trim();
-    AUTH.kvkk  = $("#a_kvkk")?.checked;
-
-    if(!AUTH.first || !AUTH.last){ toast("Ad/Soyad gerekli"); return; }
-    if(!AUTH.kvkk){ toast("Onay gerekli", "KVKK kutusunu işaretle"); return; }
-
-    USER = { role: AUTH.role, first: AUTH.first, last: AUTH.last, phone: AUTH.phone };
-    store.set("bg_user", USER);
-    toast("Hoş geldin!", `${USER.role} oturumu açıldı`);
+    USER = {first,last,phone,role};
+    store.set("bg_user2", USER);
+    toast("Hoş geldin", `${role} hesabın hazır`);
     closeModal();
-    updateUI();
+    updateUserUI();
   }
 
-  // Login button: if logged in -> logout; else open login
   $("#btnLogin").addEventListener("click", ()=>{
     if(USER){
       USER = null;
-      store.del("bg_user");
+      store.del("bg_user2");
       toast("Çıkış yapıldı");
-      updateUI();
+      updateUserUI();
     }else{
       openAuth("login","Müşteri");
     }
   });
   $("#btnRegister").addEventListener("click", ()=> openAuth("register","Müşteri"));
 
-  // --- Skills
-  const SKILLS = [
-    "Fade / Geçiş", "Sakal Tasarım", "Saç Tasarım", "Boya", "Fön", "Keratin",
-    "Çocuk Tıraşı", "Damat Tıraşı", "Cilt Bakımı", "Manikür", "Kaş / Sakal Düzeltme"
-  ];
-  let providerSkills = store.get("bg_provider_skills", []);
-  function buildSkillChips(){
-    const el = $("#skillChips");
-    if(!el) return;
-    el.innerHTML = SKILLS.map(s=>{
-      const on = providerSkills.includes(s);
-      return `<span class="chip ${on?'active':''}" onclick="toggleSkill('${s.replace(/'/g,"\\'")}')">${s}</span>`;
-    }).join("");
-  }
-  function toggleSkill(s){
-    if(providerSkills.includes(s)) providerSkills = providerSkills.filter(x=>x!==s);
-    else providerSkills.push(s);
-    store.set("bg_provider_skills", providerSkills);
-    buildSkillChips();
-  }
-
-  function saveProviderProfile(){
-    const exp = ($("#p_exp")?.value || "").trim();
-    const area = ($("#p_area")?.value || "").trim();
-    store.set("bg_provider_profile", {exp, area, skills: providerSkills});
-    toast("Kaydedildi", "Profil bilgileri demo olarak saklandı");
-  }
-
-  // --- File uploads (demo only)
-  const MAX_MB = 1.2;
-  function handleFiles(inputEl, previewEl){
-    const files = [...(inputEl.files || [])];
-    previewEl.innerHTML = "";
-    files.forEach(f=>{
-      const mb = f.size / (1024*1024);
-      if(mb > MAX_MB){
-        const box = document.createElement("div");
-        box.className="preview";
-        box.innerHTML = `Büyük<br>${mb.toFixed(1)}MB`;
-        previewEl.appendChild(box);
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = ()=>{
-        const div = document.createElement("div");
-        div.className="preview";
-        if(f.type.startsWith("image/")){
-          div.innerHTML = `<img alt="yüklenen" src="${reader.result}">`;
-        }else{
-          div.innerHTML = `PDF`;
-        }
-        previewEl.appendChild(div);
-      };
-      reader.readAsDataURL(f);
-    });
-  }
-  $("#equipFiles")?.addEventListener("change", (e)=> handleFiles(e.target, $("#equipPrev")));
-  $("#docFiles")?.addEventListener("change", (e)=> handleFiles(e.target, $("#docPrev")));
-
-  // --- Customer listing / offers (demo)
-  let listing = store.get("bg_listing", null);
+  /* Customer listing + offers */
   function createListing(){
-    listing = {
-      loc: $("#c_loc").value.trim(),
-      service: $("#c_service").value,
-      time: $("#c_time").value.trim(),
-      urg: $("#c_urg").value,
-      note: $("#c_note").value.trim(),
-      createdAt: new Date().toISOString()
-    };
-    store.set("bg_listing", listing);
-    toast("İlan yayınlandı", "Demo modda örnek teklifler gelebilir");
+    const loc = $("#c_loc").value.trim();
+    const svc = $("#c_service").value;
+    const time = $("#c_time").value.trim();
+    if(!loc || !time){ toast("Eksik bilgi","Konum ve saat gerekli"); return; }
+    store.set("bg_listing2", {loc,svc,time,note:$("#c_note").value.trim()});
+    toast("İlan gönderildi","Teklifler listelendi");
     seedOffers();
   }
 
   function seedOffers(){
     const el = $("#offers");
-    if(!el) return;
-    const mock = [
+    const list = [
       {name:"Usta Berber Ahmet", price:"450₺", eta:"25 dk", rating:"4.8"},
       {name:"Kuaför Ece", price:"550₺", eta:"40 dk", rating:"4.9"},
       {name:"Berber Can", price:"400₺", eta:"35 dk", rating:"4.6"}
     ];
-    el.innerHTML = mock.map(o=>`
-      <div class="filebox" style="border-style:solid">
-        <b>${o.name}</b>
-        <div class="hint">Fiyat: <b>${o.price}</b> • Süre: <b>${o.eta}</b> • Puan: <b>${o.rating}</b></div>
+    el.innerHTML = list.map(o=>`
+      <div class="tile" style="box-shadow:none">
+        <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap">
+          <div>
+            <div style="font-weight:650">${o.name}</div>
+            <div class="hint">Puan ${o.rating} • ${o.eta}</div>
+          </div>
+          <div style="font-weight:650">${o.price}</div>
+        </div>
         <div class="ctaRow" style="margin-top:10px">
-          <button class="btn primary small" onclick="toast('Seçildi','${o.name} (demo)')">Seç</button>
-          <button class="btn ghost small" onclick="toast('Mesaj','Canlıda chat açılacak')">Mesaj</button>
+          <button class="btn primary small" onclick="toast('Seçildi','${o.name}')">Seç</button>
+          <button class="btn ghost small" onclick="toast('Mesaj','Mesaj ekranı sonraki adım')">Mesaj</button>
         </div>
       </div>
     `).join("");
-    toast("Teklifler geldi", "Demo teklifler listelendi");
   }
 
-  function sendBid(){
-    toast("Teklif gönderildi", "Demo (Canlı modda backend’e bağlanacak)");
+  /* Skills */
+  const SKILLS = ["Fade","Sakal Tasarım","Saç Tasarım","Boya","Fön","Keratin","Çocuk Tıraşı","Damat Tıraşı","Cilt Bakımı","Manikür","Kaş"];
+  let proSkills = store.get("bg_skills2", []);
+  function buildSkills(){
+    const el = $("#skillChips");
+    el.innerHTML = SKILLS.map(s=>{
+      const on = proSkills.includes(s);
+      return `<span class="chip ${on?'active':''}" onclick="toggleSkill('${s.replace(/'/g,"\\'")}')">${s}</span>`;
+    }).join("");
+  }
+  function toggleSkill(s){
+    if(proSkills.includes(s)) proSkills = proSkills.filter(x=>x!==s);
+    else proSkills.push(s);
+    store.set("bg_skills2", proSkills);
+    buildSkills();
+  }
+  function savePro(){
+    store.set("bg_pro2", {exp:$("#p_exp").value.trim(), area:$("#p_area").value.trim(), skills:proSkills});
+    toast("Kaydedildi","Profil güncellendi");
   }
 
-  // --- Admin config
-  function saveConfig(){
-    const mode = $("#cfg_mode").value;
-    const apiBase = $("#cfg_api").value.trim();
-    CFG = {
-      ...CFG,
-      mode,
-      apiBase,
-      otpEnabled: $("#cfg_otp").value==="on",
-      kycEnabled: $("#cfg_kyc").value==="on",
-      equipEnabled: $("#cfg_equip").value==="on",
-      showNotes: $("#cfg_notes").value==="on"
-    };
-    store.set("bg_cfg", CFG);
-    $("#cfg_out").value = JSON.stringify(CFG, null, 2);
-    toast("Ayarlar kaydedildi");
-    updateUI();
+  /* Upload previews */
+  const MAX_MB = 1.2;
+  function handleFiles(inputEl, outEl){
+    const files = [...(inputEl.files||[])];
+    outEl.innerHTML = "";
+    files.forEach(f=>{
+      const mb = f.size/(1024*1024);
+      const box = document.createElement("div");
+      box.style.width="90px"; box.style.height="90px";
+      box.style.border="1px solid rgba(16,24,40,.10)";
+      box.style.borderRadius="16px";
+      box.style.overflow="hidden";
+      box.style.display="grid";
+      box.style.placeItems="center";
+      box.style.boxShadow="0 10px 18px rgba(16,24,40,.06)";
+      box.style.background="#fff";
+      if(mb>MAX_MB){ box.innerHTML = `<div style="font-weight:520;color:#334155;font-size:12px;text-align:center">Büyük<br>${mb.toFixed(1)}MB</div>`; outEl.appendChild(box); return; }
+      if(!f.type.startsWith("image/")){
+        box.innerHTML = `<div style="font-weight:520;color:#334155;font-size:12px">Dosya</div>`;
+        outEl.appendChild(box); return;
+      }
+      const r = new FileReader();
+      r.onload = ()=>{
+        box.innerHTML = `<img alt="yük" src="${r.result}" style="width:100%;height:100%;object-fit:cover">`;
+        outEl.appendChild(box);
+      };
+      r.readAsDataURL(f);
+    });
+  }
+  $("#equipFiles").addEventListener("change", (e)=> handleFiles(e.target, $("#equipPrev")));
+
+  /* Settings */
+  function saveCfg(){
+    CFG.otp = $("#cfg_otp").value;
+    store.set("bg_cfg2", CFG);
+    toast("Kaydedildi","Ayarlar güncellendi");
   }
 
-  function copyCfg(){ copy($("#cfg_out").value); }
-
-  function resetAll(){
-    if(!confirm("Tüm demo verileri sıfırlansın mı?")) return;
-    store.del("bg_cfg");
-    store.del("bg_user");
-    store.del("bg_provider_skills");
-    store.del("bg_provider_profile");
-    store.del("bg_listing");
-    CFG = DEFAULT_CFG;
-    USER = null;
-    toast("Sıfırlandı");
-    renderRoute();
-  }
-
-  // --- Share
-  function copyShare(){
-    const url = location.origin + location.pathname + "#/";
-    copy(url);
-  }
-
-  // --- Hotkey: open admin fast
-  document.addEventListener("keydown", (e)=>{
-    if(e.ctrlKey && e.shiftKey && (e.key==="D" || e.key==="d")){
-      go("#/admin");
-      toast("Admin", "Demo ayarlarına geçildi");
-    }
-  });
-
-  // --- Init
+  /* init */
   $("#year").textContent = new Date().getFullYear();
-  renderRoute();
-  window.addEventListener("hashchange", renderRoute);
+  updateShare();
+  updateUserUI();
+  buildSkills();
+  seedOffers();
 
-  // restore listing/offers
-  listing = store.get("bg_listing", null);
-  if(listing) seedOffers();
+  window.addEventListener("hashchange", renderRoute);
+  renderRoute();
 </script>
 </body>
 </html>
